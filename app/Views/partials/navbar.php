@@ -10,7 +10,7 @@
 
         <i class="bi bi-person-circle"></i>
 
-        <span>Administrator</span>
+        <span> </span>
 
     </div>
 

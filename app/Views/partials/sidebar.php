@@ -1,70 +1,88 @@
 <aside class="sidebar">
 
+    <!-- Logo -->
     <div class="logo">
+        <div class="logo-icon">
+            <i class="bi bi-grid-fill"></i>
+        </div>
 
-        <i class="bi bi-box-seam-fill"></i>
+        <div>
+            <h3>NexusERP</h3>
+            <small>Enterprise Suite</small>
+        </div>
+    </div>
 
-        <span>NexusERP</span>
+    <!-- User -->
+    <div class="user-card">
+
+        <img src="https://i.pravatar.cc/80" alt="">
+
+        <div>
+            <h4>Administrator</h4>
+            <p>
+                <span class="status"></span>
+                Online
+            </p>
+        </div>
 
     </div>
+
+    <span class="menu-title">MAIN</span>
 
     <ul class="sidebar-menu">
 
         <li>
-            <a href="/" class="active">
+            <a href="<?= base_url() ?>"
+            class="<?= service('uri')->getSegment(1) == '' ? 'active' : '' ?>">
                 <i class="bi bi-speedometer2"></i>
                 <span>Dashboard</span>
             </a>
         </li>
 
-        <li>
-            <a href="#">
-                <i class="bi bi-people"></i>
-                <span>Users</span>
-            </a>
-        </li>
+    </ul>
+
+    <span class="menu-title">INVENTORY</span>
+
+    <ul class="sidebar-menu">
 
         <li>
-            <a href="#">
-                <i class="bi bi-tags"></i>
-                <span>Categories</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
+            <a href="<?= base_url('products') ?>"
+            class="<?= service('uri')->getSegment(1) == 'products' ? 'active' : '' ?>">
                 <i class="bi bi-box"></i>
                 <span>Products</span>
             </a>
         </li>
+        <li><a href="#"><i class="bi bi-tags"></i> Categories</a></li>
 
-        <li>
-            <a href="#">
-                <i class="bi bi-building"></i>
-                <span>Suppliers</span>
-            </a>
-        </li>
+        <li><a href="#"><i class="bi bi-building"></i> Suppliers</a></li>
 
-        <li>
-            <a href="#">
-                <i class="bi bi-shop"></i>
-                <span>Sales</span>
-            </a>
-        </li>
+        <li><a href="#"><i class="bi bi-boxes"></i> Stock</a></li>
 
-        <li>
-            <a href="#">
-                <i class="bi bi-cart-check"></i>
-                <span>Purchases</span>
-            </a>
-        </li>
+    </ul>
 
-        <li>
-            <a href="#">
-                <i class="bi bi-clipboard-data"></i>
-                <span>Reports</span>
-            </a>
-        </li>
+    <span class="menu-title">SALES</span>
+
+    <ul class="sidebar-menu">
+
+        <li><a href="#"><i class="bi bi-shop"></i> Sales</a></li>
+
+        <li><a href="#"><i class="bi bi-cart-check"></i> Purchases</a></li>
+
+        <li><a href="#"><i class="bi bi-receipt"></i> Invoices</a></li>
+
+    </ul>
+
+    <span class="menu-title">SYSTEM</span>
+
+    <ul class="sidebar-menu">
+
+        <li><a href="#"><i class="bi bi-people"></i> Users</a></li>
+
+        <li><a href="#"><i class="bi bi-shield-lock"></i> Roles</a></li>
+
+        <li><a href="#"><i class="bi bi-clipboard-data"></i> Reports</a></li>
+
+        <li><a href="#"><i class="bi bi-gear"></i> Settings</a></li>
 
     </ul>
 
