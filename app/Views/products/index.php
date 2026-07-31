@@ -2,163 +2,229 @@
 
 <?= $this->section('content') ?>
 
-<div class="page-header">
-    <h2>Products</h2>
+<div class="container-fluid">
 
-    <a href="<?= base_url('products/create') ?>" class="btn btn-primary">
-        <i class="bi bi-plus-circle"></i>
-        Add Product
-    </a>
-</div>
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<div class="card">
+        <div>
+            <h3 class="fw-bold mb-1">Products</h3>
+            <p class="text-muted mb-0">
+                Manage your product catalog
+            </p>
+        </div>
 
-    <div class="card-header">
-
-        <input
-            type="text"
-            class="form-control"
-            placeholder="Search products..."
-        >
+        <a href="<?= base_url('products/create') ?>" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>
+            Add Product
+        </a>
 
     </div>
 
-    <div class="table-responsive">
+    <!-- Success Message -->
+    <?php if (session()->getFlashdata('success')) : ?>
 
-        <table class="table">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
 
-            <thead>
+            <?= session()->getFlashdata('success') ?>
 
-                <tr>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+            </button>
 
-                    <th>SKU</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Brand</th>
-                    <th>Stock</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th width="170">Actions</th>
+        </div>
 
-                </tr>
+    <?php endif; ?>
 
-            </thead>
+    <!-- Products Table -->
+    <div class="card border-0 shadow-sm">
 
-            <tbody>
+        <div class="card-body">
 
-                <?php if($products): ?>
+            <div class="table-responsive">
 
-                    <?php foreach($products as $product): ?>
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
 
                         <tr>
 
-                            <td><?= esc($product['sku']) ?></td>
-
-                            <td><?= esc($product['name']) ?></td>
-
-                            <td><?= esc($product['category']) ?></td>
-
-                            <td><?= esc($product['brand']) ?></td>
-
-                            <td>
-
-                                <?php if($product['stock'] <= $product['min_stock']): ?>
-
-                                    <span class="badge badge-danger">
-
-                                        <?= $product['stock'] ?>
-
-                                    </span>
-
-                                <?php else: ?>
-
-                                    <span class="badge badge-success">
-
-                                        <?= $product['stock'] ?>
-
-                                    </span>
-
-                                <?php endif; ?>
-
-                            </td>
-
-                            <td>
-
-                                KES <?= number_format($product['selling_price'],2) ?>
-
-                            </td>
-
-                            <td>
-
-                                <?php if($product['status']=="Active"): ?>
-
-                                    <span class="badge badge-success">
-                                        Active
-                                    </span>
-
-                                <?php else: ?>
-
-                                    <span class="badge badge-secondary">
-                                        Inactive
-                                    </span>
-
-                                <?php endif; ?>
-
-                            </td>
-
-                            <td>
-
-                                <a
-                                    href="<?= base_url('products/show/'.$product['id']) ?>"
-                                    class="btn btn-info btn-sm"
-                                >
-
-                                    View
-
-                                </a>
-
-                                <a
-                                    href="<?= base_url('products/edit/'.$product['id']) ?>"
-                                    class="btn btn-warning btn-sm"
-                                >
-
-                                    Edit
-
-                                </a>
-
-                                <a
-                                    href="<?= base_url('products/delete/'.$product['id']) ?>"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Delete product?')"
-                                >
-
-                                    Delete
-
-                                </a>
-
-                            </td>
+                            <th>SKU</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Brand</th>
+                            <th>Stock</th>
+                            <th>Selling Price</th>
+                            <th>Status</th>
+                            <th width="180" class="text-center">Actions</th>
 
                         </tr>
 
-                    <?php endforeach; ?>
+                    </thead>
 
-                <?php else: ?>
+                    <tbody>
 
-                    <tr>
+                        <?php if (!empty($products)) : ?>
 
-                        <td colspan="8" align="center">
+                            <?php foreach ($products as $product) : ?>
 
-                            No products found.
+                                <tr>
 
-                        </td>
+                                    <td>
 
-                    </tr>
+                                        <span class="fw-semibold text-primary">
 
-                <?php endif; ?>
+                                            <?= esc($product['sku']) ?>
 
-            </tbody>
+                                        </span>
 
-        </table>
+                                    </td>
+
+                                    <td>
+
+                                        <?= esc($product['name']) ?>
+
+                                    </td>
+
+                                    <td>
+
+                                        <?= esc($product['category_name']) ?>
+
+                                    </td>
+
+                                    <td>
+
+                                        <?= esc($product['brand']) ?>
+
+                                    </td>
+
+                                    <td>
+
+                                        <?php if ($product['stock'] <= $product['min_stock']) : ?>
+
+                                            <span class="badge bg-danger">
+
+                                                <?= $product['stock'] ?>
+
+                                            </span>
+
+                                        <?php else : ?>
+
+                                            <span class="badge bg-success">
+
+                                                <?= $product['stock'] ?>
+
+                                            </span>
+
+                                        <?php endif; ?>
+
+                                    </td>
+
+                                    <td>
+
+                                        KES <?= number_format($product['selling_price'], 2) ?>
+
+                                    </td>
+
+                                    <td>
+
+                                        <?php if ($product['status'] == 'Active') : ?>
+
+                                            <span class="badge bg-success">
+
+                                                Active
+
+                                            </span>
+
+                                        <?php else : ?>
+
+                                            <span class="badge bg-danger">
+
+                                                Inactive
+
+                                            </span>
+
+                                        <?php endif; ?>
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <a
+                                            href="<?= base_url('products/show/' . $product['id']) ?>"
+                                            class="btn btn-sm btn-info text-white"
+                                            title="View">
+
+                                            <i class="bi bi-eye"></i>
+
+                                        </a>
+
+                                        <a
+                                            href="<?= base_url('products/edit/' . $product['id']) ?>"
+                                            class="btn btn-sm btn-warning"
+                                            title="Edit">
+
+                                            <i class="bi bi-pencil"></i>
+
+                                        </a>
+
+                                        <a
+                                            href="<?= base_url('products/delete/' . $product['id']) ?>"
+                                            class="btn btn-sm btn-danger"
+                                            title="Delete"
+                                            onclick="return confirm('Are you sure you want to delete this product?')">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            <?php endforeach; ?>
+
+                        <?php else : ?>
+
+                            <tr>
+
+                                <td colspan="8" class="text-center py-5">
+
+                                    <i class="bi bi-box-seam fs-1 text-muted d-block mb-3"></i>
+
+                                    <h5>No Products Found</h5>
+
+                                    <p class="text-muted mb-3">
+
+                                        Start by creating your first product.
+
+                                    </p>
+
+                                    <a
+                                        href="<?= base_url('products/create') ?>"
+                                        class="btn btn-primary">
+
+                                        <i class="bi bi-plus-circle me-2"></i>
+
+                                        Add Product
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                        <?php endif; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
     </div>
 

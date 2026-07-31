@@ -1,164 +1,181 @@
-<div class="card">
+<div class="card border-0 shadow-sm">
 
     <div class="card-body">
 
         <div class="row">
 
+            <!-- SKU -->
             <div class="col-md-6 mb-3">
-
-                <label>SKU</label>
+                <label class="form-label fw-semibold">Product SKU</label>
 
                 <input
                     type="text"
-                    name="sku"
-                    class="form-control"
-                    value="<?= $product['sku'] ?? '' ?>"
-                    readonly
-                >
-
+                    class="form-control bg-light"
+                    value="<?= $product['sku'] ?? 'Auto Generated' ?>"
+                    readonly>
             </div>
 
+            <!-- Barcode -->
             <div class="col-md-6 mb-3">
-
-                <label>Barcode</label>
+                <label class="form-label fw-semibold">Barcode</label>
 
                 <input
                     type="text"
-                    name="barcode"
-                    class="form-control"
-                    value="<?= $product['barcode'] ?? '' ?>"
-                    readonly
-                >
-
+                    class="form-control bg-light"
+                    value="<?= $product['barcode'] ?? 'Auto Generated' ?>"
+                    readonly>
             </div>
 
+            <!-- Product Name -->
             <div class="col-md-6 mb-3">
-
-                <label>Product Name</label>
+                <label class="form-label fw-semibold">Product Name</label>
 
                 <input
                     type="text"
                     name="name"
                     class="form-control"
-                    value="<?= $product['name'] ?? '' ?>"
-                    required
-                >
+                    value="<?= old('name', $product['name'] ?? '') ?>"
+                    required>
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label fw-semibold">Category</label>
+
+                <select
+                    name="category_id"
+                    class="form-select"
+                    required>
+
+                    <option value="">Select Category</option>
+
+                    <?php foreach ($categories as $category): ?>
+
+                        <option
+                            value="<?= $category['id'] ?>"
+                            <?= old('category_id', $product['category_id'] ?? '') == $category['id'] ? 'selected' : '' ?>>
+
+                            <?= esc($category['name']) ?>
+
+                        </option>
+
+                    <?php endforeach; ?>
+
+                </select>
 
             </div>
 
+            <!-- Brand -->
             <div class="col-md-6 mb-3">
 
-                <label>Category</label>
-
-                <input
-                    type="text"
-                    name="category"
-                    class="form-control"
-                    value="<?= $product['category'] ?? '' ?>"
-                >
-
-            </div>
-
-            <div class="col-md-6 mb-3">
-
-                <label>Brand</label>
+                <label class="form-label fw-semibold">Brand</label>
 
                 <input
                     type="text"
                     name="brand"
                     class="form-control"
-                    value="<?= $product['brand'] ?? '' ?>"
-                >
+                    value="<?= old('brand', $product['brand'] ?? '') ?>">
 
             </div>
 
+            <!-- Unit -->
             <div class="col-md-6 mb-3">
 
-                <label>Unit</label>
+                <label class="form-label fw-semibold">Unit</label>
 
                 <input
                     type="text"
                     name="unit"
                     class="form-control"
-                    value="<?= $product['unit'] ?? 'Piece' ?>"
-                >
+                    value="<?= old('unit', $product['unit'] ?? 'Piece') ?>">
 
             </div>
 
+            <!-- Cost Price -->
             <div class="col-md-6 mb-3">
 
-                <label>Cost Price</label>
+                <label class="form-label fw-semibold">
+                    Cost Price (KES)
+                </label>
 
                 <input
                     type="number"
                     step="0.01"
                     name="cost_price"
                     class="form-control"
-                    value="<?= $product['cost_price'] ?? '' ?>"
-                >
+                    value="<?= old('cost_price', $product['cost_price'] ?? '') ?>"
+                    required>
 
             </div>
 
+            <!-- Selling Price -->
             <div class="col-md-6 mb-3">
 
-                <label>Selling Price</label>
+                <label class="form-label fw-semibold">
+                    Selling Price (KES)
+                </label>
 
                 <input
                     type="number"
                     step="0.01"
                     name="selling_price"
                     class="form-control"
-                    value="<?= $product['selling_price'] ?? '' ?>"
-                >
+                    value="<?= old('selling_price', $product['selling_price'] ?? '') ?>"
+                    required>
 
             </div>
 
+            <!-- Stock -->
             <div class="col-md-6 mb-3">
 
-                <label>Stock</label>
+                <label class="form-label fw-semibold">
+                    Current Stock
+                </label>
 
                 <input
                     type="number"
                     name="stock"
                     class="form-control"
-                    value="<?= $product['stock'] ?? 0 ?>"
-                >
+                    value="<?= old('stock', $product['stock'] ?? 0) ?>"
+                    required>
 
             </div>
 
+            <!-- Minimum Stock -->
             <div class="col-md-6 mb-3">
 
-                <label>Minimum Stock</label>
+                <label class="form-label fw-semibold">
+                    Minimum Stock
+                </label>
 
                 <input
                     type="number"
                     name="min_stock"
                     class="form-control"
-                    value="<?= $product['min_stock'] ?? 5 ?>"
-                >
+                    value="<?= old('min_stock', $product['min_stock'] ?? 5) ?>"
+                    required>
 
             </div>
 
+            <!-- Status -->
             <div class="col-md-6 mb-4">
 
-                <label>Status</label>
+                <label class="form-label fw-semibold">Status</label>
 
                 <select
                     name="status"
-                    class="form-control"
-                >
+                    class="form-select">
 
                     <option
                         value="Active"
-                        <?= (($product['status'] ?? '') == 'Active') ? 'selected' : '' ?>
-                    >
+                        <?= old('status', $product['status'] ?? 'Active') == 'Active' ? 'selected' : '' ?>>
                         Active
                     </option>
 
                     <option
                         value="Inactive"
-                        <?= (($product['status'] ?? '') == 'Inactive') ? 'selected' : '' ?>
-                    >
+                        <?= old('status', $product['status'] ?? '') == 'Inactive' ? 'selected' : '' ?>>
                         Inactive
                     </option>
 
@@ -168,20 +185,27 @@
 
         </div>
 
-        <button class="btn btn-primary">
+        <hr>
 
-            Save Product
+        <div class="d-flex justify-content-end gap-2">
 
-        </button>
+            <a href="<?= base_url('products') ?>" class="btn btn-outline-secondary">
 
-        <a
-            href="<?= base_url('products') ?>"
-            class="btn btn-secondary"
-        >
+                <i class="bi bi-arrow-left me-1"></i>
 
-            Cancel
+                Cancel
 
-        </a>
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+
+                <i class="bi bi-check-circle me-1"></i>
+
+                Save Product
+
+            </button>
+
+        </div>
 
     </div>
 

@@ -3,14 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\ProductModel;
+use App\Models\CategoryModel;
+
 
 class Products extends BaseController
 {
     protected $productModel;
+    protected $categoryModel;
 
     public function __construct()
     {
         $this->productModel = new ProductModel();
+        $this->categoryModel = new CategoryModel();
     }
 
     /**
@@ -18,10 +22,15 @@ class Products extends BaseController
      */
     public function index()
     {
-        $data['title'] = 'Products';
-        $data['products'] = $this->productModel
-            ->orderBy('id', 'DESC')
-            ->findAll();
+        $data = [
+        'title' => 'Products',
+
+        'products' => $this->productModel
+            ->select('products.*, categories.name AS category_name')
+            ->join('categories', 'categories.id = products.category_id', 'left')
+            ->orderBy('products.id', 'DESC')
+            ->findAll(),
+        ];
 
         return view('products/index', $data);
     }
@@ -32,7 +41,14 @@ class Products extends BaseController
     public function create()
     {
         return view('products/create', [
-            'title' => 'Add Product'
+
+            'title' => 'Add Product',
+
+            'categories' => $this->categoryModel
+                ->where('status', 'Active')
+                ->orderBy('name')
+                ->findAll(),
+
         ]);
     }
 
@@ -40,12 +56,13 @@ class Products extends BaseController
      * Save product
      */
     public function store()
-    {
+    {   
         $this->productModel->save([
-            'sku'            => $this->request->getPost('sku'),
-            'barcode'        => $this->request->getPost('barcode'),
+            
+            'sku' => $this->productModel->generateSku(),
+            'barcode' => $this->productModel->generateBarcode(),
             'name'           => $this->request->getPost('name'),
-            'category'       => $this->request->getPost('category'),
+            'category_id'       => $this->request->getPost('category_id'),
             'brand'          => $this->request->getPost('brand'),
             'unit'           => $this->request->getPost('unit'),
             'cost_price'     => $this->request->getPost('cost_price'),
@@ -65,8 +82,16 @@ class Products extends BaseController
     public function edit($id)
     {
         return view('products/edit', [
-            'title'   => 'Edit Product',
-            'product' => $this->productModel->find($id)
+
+            'title' => 'Edit Product',
+
+            'product' => $this->productModel->find($id),
+
+            'categories' => $this->categoryModel
+                ->where('status', 'Active')
+                ->orderBy('name')
+                ->findAll(),
+
         ]);
     }
 
@@ -79,7 +104,7 @@ class Products extends BaseController
             'sku'            => $this->request->getPost('sku'),
             'barcode'        => $this->request->getPost('barcode'),
             'name'           => $this->request->getPost('name'),
-            'category'       => $this->request->getPost('category'),
+            'category_id'       => $this->request->getPost('category_id'),
             'brand'          => $this->request->getPost('brand'),
             'unit'           => $this->request->getPost('unit'),
             'cost_price'     => $this->request->getPost('cost_price'),
@@ -111,7 +136,10 @@ class Products extends BaseController
     {
         return view('products/show', [
             'title'   => 'Product Details',
-            'product' => $this->productModel->find($id)
+            'product' => $this->productModel
+                ->select('products.*, categories.name AS category_name')
+                ->join('categories', 'categories.id = products.category_id', 'left')
+                ->find($id)        
         ]);
     }
     

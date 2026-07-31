@@ -14,7 +14,7 @@ class ProductModel extends Model
         'sku',
         'barcode',
         'name',
-        'category',
+        'category_id',
         'brand',
         'unit',
         'cost_price',

@@ -9,16 +9,16 @@
         <div>
 
             <h3 class="fw-bold mb-1">
-                Add Product
+                Edit Category
             </h3>
 
             <p class="text-muted mb-0">
-                Create a new product.
+                Update category information.
             </p>
 
         </div>
 
-        <a href="<?= base_url('products') ?>" class="btn btn-outline-secondary">
+        <a href="<?= base_url('categories') ?>" class="btn btn-outline-secondary">
 
             <i class="bi bi-arrow-left me-2"></i>
 
@@ -28,14 +28,15 @@
 
     </div>
 
-    <form action="<?= base_url('products/store') ?>" method="post">
+    <?= view('categories/_form', [
 
-        <?= view('products/_form', [
-            'product' => [],
-            'categories' => $categories,
-        ]) ?>
+        'action' => base_url('categories/update/' . $category['id']),
 
-    </form>
+        'category' => $category,
+
+        'categoryCode' => $category['category_code']
+
+    ]) ?>
 
 </div>
 

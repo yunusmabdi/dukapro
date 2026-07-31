@@ -52,8 +52,12 @@
                 <span>Products</span>
             </a>
         </li>
-        <li><a href="#"><i class="bi bi-tags"></i> Categories</a></li>
-
+        <li>
+            <a href="<?= base_url('categories') ?>">
+                <i class="bi bi-tags"></i>
+                <span>Categories</span>
+            </a>
+        </li>
         <li><a href="#"><i class="bi bi-building"></i> Suppliers</a></li>
 
         <li><a href="#"><i class="bi bi-boxes"></i> Stock</a></li>

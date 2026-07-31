@@ -16,3 +16,13 @@ $routes->post('products/update/(:num)', 'Products::update/$1');
 $routes->get('products/delete/(:num)', 'Products::delete/$1');
 
 $routes->get('products/show/(:num)', 'Products::show/$1');
+
+$routes->get('categories', 'Categories::index');
+$routes->get('/categories/create', 'Categories::create');
+$routes->post('/categories/store', 'Categories::store');
+
+$routes->get('/categories/edit/(:num)', 'Categories::edit/$1');
+$routes->post('/categories/update/(:num)', 'Categories::update/$1');
+
+$routes->get('/categories/delete/(:num)', 'Categories::delete/$1');
+$routes->get('/categories/show/(:num', 'Ctegories::show/$1');
