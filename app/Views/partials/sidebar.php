@@ -58,7 +58,15 @@
                 <span>Categories</span>
             </a>
         </li>
-        <li><a href="#"><i class="bi bi-building"></i> Suppliers</a></li>
+        <li class="nav-item">
+            <a href="<?= base_url('suppliers') ?>" class="nav-link">
+
+                <i class="bi bi-truck"></i>
+
+                <span>Suppliers</span>
+
+            </a>
+        </li>
 
         <li><a href="#"><i class="bi bi-boxes"></i> Stock</a></li>
 

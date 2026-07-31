@@ -9,9 +9,7 @@
 
         <div>
 
-            <h3 class="fw-bold mb-1">
-                Product Details
-            </h3>
+            <h3 class="fw-bold mb-1">Product Details</h3>
 
             <p class="text-muted mb-0">
                 View product information.
@@ -57,7 +55,12 @@
 
                 <div class="col-md-6 mb-3">
                     <label class="fw-semibold text-muted">Category</label>
-                    <div><?= esc($product['category_name']) ?></div>
+                    <div><?= esc($product['category_name'] ?? '-') ?></div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-semibold text-muted">Supplier</label>
+                    <div><?= esc($product['supplier_name'] ?? '-') ?></div>
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -72,7 +75,25 @@
 
                 <div class="col-md-6 mb-3">
                     <label class="fw-semibold text-muted">Current Stock</label>
-                    <div><?= esc($product['stock']) ?></div>
+
+                    <?php if ($product['stock'] <= $product['min_stock']) : ?>
+
+                        <div>
+                            <span class="badge bg-danger">
+                                <?= esc($product['stock']) ?>
+                            </span>
+                        </div>
+
+                    <?php else : ?>
+
+                        <div>
+                            <span class="badge bg-success">
+                                <?= esc($product['stock']) ?>
+                            </span>
+                        </div>
+
+                    <?php endif; ?>
+
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -96,7 +117,7 @@
 
                     <div>
 
-                        <?php if ($product['status'] == 'Active'): ?>
+                        <?php if ($product['status'] === 'Active') : ?>
 
                             <span class="badge bg-success">
 
@@ -104,9 +125,9 @@
 
                             </span>
 
-                        <?php else: ?>
+                        <?php else : ?>
 
-                            <span class="badge bg-danger">
+                            <span class="badge bg-secondary">
 
                                 Inactive
 

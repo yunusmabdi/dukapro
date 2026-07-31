@@ -6,29 +6,40 @@
 
             <!-- SKU -->
             <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Product SKU</label>
+
+                <label class="form-label fw-semibold">
+                    Product SKU
+                </label>
 
                 <input
                     type="text"
                     class="form-control bg-light"
                     value="<?= $product['sku'] ?? 'Auto Generated' ?>"
                     readonly>
+
             </div>
 
             <!-- Barcode -->
             <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Barcode</label>
+
+                <label class="form-label fw-semibold">
+                    Barcode
+                </label>
 
                 <input
                     type="text"
                     class="form-control bg-light"
                     value="<?= $product['barcode'] ?? 'Auto Generated' ?>"
                     readonly>
+
             </div>
 
             <!-- Product Name -->
             <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Product Name</label>
+
+                <label class="form-label fw-semibold">
+                    Product Name
+                </label>
 
                 <input
                     type="text"
@@ -36,12 +47,15 @@
                     class="form-control"
                     value="<?= old('name', $product['name'] ?? '') ?>"
                     required>
+
             </div>
 
             <!-- Category -->
             <div class="col-md-6 mb-3">
 
-                <label class="form-label fw-semibold">Category</label>
+                <label class="form-label fw-semibold">
+                    Category
+                </label>
 
                 <select
                     name="category_id"
@@ -66,10 +80,42 @@
 
             </div>
 
+            <!-- Supplier -->
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label fw-semibold">
+                    Supplier
+                </label>
+
+                <select
+                    name="supplier_id"
+                    class="form-select"
+                    required>
+
+                    <option value="">Select Supplier</option>
+
+                    <?php foreach ($suppliers as $supplier): ?>
+
+                        <option
+                            value="<?= $supplier['id'] ?>"
+                            <?= old('supplier_id', $product['supplier_id'] ?? '') == $supplier['id'] ? 'selected' : '' ?>>
+
+                            <?= esc($supplier['company_name']) ?>
+
+                        </option>
+
+                    <?php endforeach; ?>
+
+                </select>
+
+            </div>
+
             <!-- Brand -->
             <div class="col-md-6 mb-3">
 
-                <label class="form-label fw-semibold">Brand</label>
+                <label class="form-label fw-semibold">
+                    Brand
+                </label>
 
                 <input
                     type="text"
@@ -82,7 +128,9 @@
             <!-- Unit -->
             <div class="col-md-6 mb-3">
 
-                <label class="form-label fw-semibold">Unit</label>
+                <label class="form-label fw-semibold">
+                    Unit
+                </label>
 
                 <input
                     type="text"
@@ -126,7 +174,7 @@
 
             </div>
 
-            <!-- Stock -->
+            <!-- Current Stock -->
             <div class="col-md-6 mb-3">
 
                 <label class="form-label fw-semibold">
@@ -159,9 +207,11 @@
             </div>
 
             <!-- Status -->
-            <div class="col-md-6 mb-4">
+            <div class="col-md-6 mb-3">
 
-                <label class="form-label fw-semibold">Status</label>
+                <label class="form-label fw-semibold">
+                    Status
+                </label>
 
                 <select
                     name="status"
@@ -170,13 +220,17 @@
                     <option
                         value="Active"
                         <?= old('status', $product['status'] ?? 'Active') == 'Active' ? 'selected' : '' ?>>
+
                         Active
+
                     </option>
 
                     <option
                         value="Inactive"
                         <?= old('status', $product['status'] ?? '') == 'Inactive' ? 'selected' : '' ?>>
+
                         Inactive
+
                     </option>
 
                 </select>
@@ -189,7 +243,9 @@
 
         <div class="d-flex justify-content-end gap-2">
 
-            <a href="<?= base_url('products') ?>" class="btn btn-outline-secondary">
+            <a
+                href="<?= base_url('products') ?>"
+                class="btn btn-outline-secondary">
 
                 <i class="bi bi-arrow-left me-1"></i>
 
@@ -197,7 +253,9 @@
 
             </a>
 
-            <button type="submit" class="btn btn-primary">
+            <button
+                type="submit"
+                class="btn btn-primary">
 
                 <i class="bi bi-check-circle me-1"></i>
 

@@ -25,4 +25,18 @@ $routes->get('/categories/edit/(:num)', 'Categories::edit/$1');
 $routes->post('/categories/update/(:num)', 'Categories::update/$1');
 
 $routes->get('/categories/delete/(:num)', 'Categories::delete/$1');
-$routes->get('/categories/show/(:num', 'Ctegories::show/$1');
+$routes->get('/categories/show/(:num)', 'Categories::show/$1');
+
+$routes->get('suppliers','Suppliers::index');
+
+$routes->get('suppliers/create','Suppliers::create');
+
+$routes->post('suppliers/store','Suppliers::store');
+
+$routes->get('suppliers/show/(:num)','Suppliers::show/$1');
+
+$routes->get('suppliers/edit/(:num)','Suppliers::edit/$1');
+
+$routes->post('suppliers/update/(:num)','Suppliers::update/$1');
+
+$routes->get('suppliers/delete/(:num)','Suppliers::delete/$1');

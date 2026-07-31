@@ -15,6 +15,7 @@ class ProductModel extends Model
         'barcode',
         'name',
         'category_id',
+        'supplier_id',
         'brand',
         'unit',
         'cost_price',

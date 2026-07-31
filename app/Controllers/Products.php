@@ -4,17 +4,20 @@ namespace App\Controllers;
 
 use App\Models\ProductModel;
 use App\Models\CategoryModel;
-
+use App\Models\SupplierModel;
 
 class Products extends BaseController
 {
     protected $productModel;
     protected $categoryModel;
 
+    protected $supplierModel;
+
     public function __construct()
     {
         $this->productModel = new ProductModel();
         $this->categoryModel = new CategoryModel();
+        $this->supplierModel = new SupplierModel();
     }
 
     /**
@@ -28,6 +31,8 @@ class Products extends BaseController
         'products' => $this->productModel
             ->select('products.*, categories.name AS category_name')
             ->join('categories', 'categories.id = products.category_id', 'left')
+            ->join('suppliers', 'suppliers.id = products.supplier_id', 'left')
+
             ->orderBy('products.id', 'DESC')
             ->findAll(),
         ];
@@ -49,6 +54,8 @@ class Products extends BaseController
                 ->orderBy('name')
                 ->findAll(),
 
+            'suppliers' => $this->supplierModel
+                ->findall(),
         ]);
     }
 
@@ -59,10 +66,11 @@ class Products extends BaseController
     {   
         $this->productModel->save([
             
-            'sku' => $this->productModel->generateSku(),
-            'barcode' => $this->productModel->generateBarcode(),
+            'sku'            => $this->productModel->generateSku(),
+            'barcode'        => $this->productModel->generateBarcode(),
             'name'           => $this->request->getPost('name'),
-            'category_id'       => $this->request->getPost('category_id'),
+            'category_id'    => $this->request->getPost('category_id'),
+            'supplier_id'    => $this->request->getPost('supplier_id'),
             'brand'          => $this->request->getPost('brand'),
             'unit'           => $this->request->getPost('unit'),
             'cost_price'     => $this->request->getPost('cost_price'),
@@ -104,7 +112,8 @@ class Products extends BaseController
             'sku'            => $this->request->getPost('sku'),
             'barcode'        => $this->request->getPost('barcode'),
             'name'           => $this->request->getPost('name'),
-            'category_id'       => $this->request->getPost('category_id'),
+            'category_id'    => $this->request->getPost('category_id'),
+            'supplier_id'    => $this->request->getPost('supplier_id'),
             'brand'          => $this->request->getPost('brand'),
             'unit'           => $this->request->getPost('unit'),
             'cost_price'     => $this->request->getPost('cost_price'),
@@ -134,12 +143,16 @@ class Products extends BaseController
      */
     public function show($id)
     {
+        $product = $this->productModel
+            ->select('products.*, categories.name as category_name, suppliers.company_name as supplier_name')
+            ->join('categories', 'categories.id = products.category_id', 'left')
+            ->join('suppliers', 'suppliers.id = products.supplier_id', 'left')
+            ->where('products.id', $id)
+            ->first();
+
         return view('products/show', [
             'title'   => 'Product Details',
-            'product' => $this->productModel
-                ->select('products.*, categories.name AS category_name')
-                ->join('categories', 'categories.id = products.category_id', 'left')
-                ->find($id)        
+            'product' => $product,
         ]);
     }
     

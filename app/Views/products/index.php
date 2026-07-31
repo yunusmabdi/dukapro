@@ -54,6 +54,7 @@
                             <th>SKU</th>
                             <th>Product</th>
                             <th>Category</th>
+                            <th>Supplier</th>
                             <th>Brand</th>
                             <th>Stock</th>
                             <th>Selling Price</th>
@@ -73,31 +74,25 @@
                                 <tr>
 
                                     <td>
-
                                         <span class="fw-semibold text-primary">
-
                                             <?= esc($product['sku']) ?>
-
                                         </span>
-
                                     </td>
 
                                     <td>
-
                                         <?= esc($product['name']) ?>
-
                                     </td>
 
                                     <td>
-
-                                        <?= esc($product['category_name']) ?>
-
+                                        <?= esc($product['category_name'] ?? '-') ?>
                                     </td>
 
                                     <td>
+                                        <?= esc($product['supplier_name'] ?? '-') ?>
+                                    </td>
 
+                                    <td>
                                         <?= esc($product['brand']) ?>
-
                                     </td>
 
                                     <td>
@@ -105,17 +100,13 @@
                                         <?php if ($product['stock'] <= $product['min_stock']) : ?>
 
                                             <span class="badge bg-danger">
-
                                                 <?= $product['stock'] ?>
-
                                             </span>
 
                                         <?php else : ?>
 
                                             <span class="badge bg-success">
-
                                                 <?= $product['stock'] ?>
-
                                             </span>
 
                                         <?php endif; ?>
@@ -123,27 +114,21 @@
                                     </td>
 
                                     <td>
-
                                         KES <?= number_format($product['selling_price'], 2) ?>
-
                                     </td>
 
                                     <td>
 
-                                        <?php if ($product['status'] == 'Active') : ?>
+                                        <?php if ($product['status'] === 'Active') : ?>
 
                                             <span class="badge bg-success">
-
                                                 Active
-
                                             </span>
 
                                         <?php else : ?>
 
-                                            <span class="badge bg-danger">
-
+                                            <span class="badge bg-secondary">
                                                 Inactive
-
                                             </span>
 
                                         <?php endif; ?>
@@ -190,16 +175,14 @@
 
                             <tr>
 
-                                <td colspan="8" class="text-center py-5">
+                                <td colspan="9" class="text-center py-5">
 
                                     <i class="bi bi-box-seam fs-1 text-muted d-block mb-3"></i>
 
                                     <h5>No Products Found</h5>
 
                                     <p class="text-muted mb-3">
-
                                         Start by creating your first product.
-
                                     </p>
 
                                     <a
