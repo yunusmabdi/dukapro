@@ -29,10 +29,13 @@ class Products extends BaseController
         'title' => 'Products',
 
         'products' => $this->productModel
-            ->select('products.*, categories.name AS category_name')
+            ->select('
+                products.*,
+                categories.name AS category_name,
+                suppliers.company_name AS supplier_name
+            ')
             ->join('categories', 'categories.id = products.category_id', 'left')
             ->join('suppliers', 'suppliers.id = products.supplier_id', 'left')
-
             ->orderBy('products.id', 'DESC')
             ->findAll(),
         ];
@@ -45,7 +48,7 @@ class Products extends BaseController
      */
     public function create()
     {
-        return view('products/create', [
+        $data = [
 
             'title' => 'Add Product',
 
@@ -56,7 +59,8 @@ class Products extends BaseController
 
             'suppliers' => $this->supplierModel
                 ->findall(),
-        ]);
+        ];
+        return view('products/create', $data);
     }
 
     /**
@@ -89,7 +93,7 @@ class Products extends BaseController
      */
     public function edit($id)
     {
-        return view('products/edit', [
+        $data = [
 
             'title' => 'Edit Product',
 
@@ -100,7 +104,8 @@ class Products extends BaseController
                 ->orderBy('name')
                 ->findAll(),
 
-        ]);
+        ];
+        return view('products/edit', $data);
     }
 
     /**

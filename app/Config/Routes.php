@@ -40,3 +40,5 @@ $routes->get('suppliers/edit/(:num)','Suppliers::edit/$1');
 $routes->post('suppliers/update/(:num)','Suppliers::update/$1');
 
 $routes->get('suppliers/delete/(:num)','Suppliers::delete/$1');
+
+$routes->get('inventory', 'Inventory::index');

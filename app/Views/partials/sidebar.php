@@ -68,7 +68,12 @@
             </a>
         </li>
 
-        <li><a href="#"><i class="bi bi-boxes"></i> Stock</a></li>
+        <li class="nav-item">
+            <a href="<?= base_url('inventory') ?>" class="nav-link">
+                <i class="bi bi-boxes me-2"></i>
+                <span>Inventory</span>
+            </a>
+        </li>
 
     </ul>
 

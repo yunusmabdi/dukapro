@@ -6,40 +6,29 @@
 
             <!-- SKU -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Product SKU
-                </label>
+                <label class="form-label fw-semibold">Product SKU</label>
 
                 <input
                     type="text"
                     class="form-control bg-light"
-                    value="<?= $product['sku'] ?? 'Auto Generated' ?>"
+                    value="<?= esc($product['sku'] ?? 'Auto Generated') ?>"
                     readonly>
-
             </div>
 
             <!-- Barcode -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Barcode
-                </label>
+                <label class="form-label fw-semibold">Barcode</label>
 
                 <input
                     type="text"
                     class="form-control bg-light"
-                    value="<?= $product['barcode'] ?? 'Auto Generated' ?>"
+                    value="<?= esc($product['barcode'] ?? 'Auto Generated') ?>"
                     readonly>
-
             </div>
 
             <!-- Product Name -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Product Name
-                </label>
+                <label class="form-label fw-semibold">Product Name</label>
 
                 <input
                     type="text"
@@ -47,15 +36,11 @@
                     class="form-control"
                     value="<?= old('name', $product['name'] ?? '') ?>"
                     required>
-
             </div>
 
             <!-- Category -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Category
-                </label>
+                <label class="form-label fw-semibold">Category</label>
 
                 <select
                     name="category_id"
@@ -64,28 +49,28 @@
 
                     <option value="">Select Category</option>
 
-                    <?php foreach ($categories as $category): ?>
+                    <?php if (!empty($categories)) : ?>
 
-                        <option
-                            value="<?= $category['id'] ?>"
-                            <?= old('category_id', $product['category_id'] ?? '') == $category['id'] ? 'selected' : '' ?>>
+                        <?php foreach ($categories as $category) : ?>
 
-                            <?= esc($category['name']) ?>
+                            <option
+                                value="<?= $category['id'] ?>"
+                                <?= old('category_id', $product['category_id'] ?? '') == $category['id'] ? 'selected' : '' ?>>
 
-                        </option>
+                                <?= esc($category['name']) ?>
 
-                    <?php endforeach; ?>
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    <?php endif; ?>
 
                 </select>
-
             </div>
 
             <!-- Supplier -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Supplier
-                </label>
+                <label class="form-label fw-semibold">Supplier</label>
 
                 <select
                     name="supplier_id"
@@ -94,58 +79,50 @@
 
                     <option value="">Select Supplier</option>
 
-                    <?php foreach ($suppliers as $supplier): ?>
+                    <?php if (!empty($suppliers)) : ?>
 
-                        <option
-                            value="<?= $supplier['id'] ?>"
-                            <?= old('supplier_id', $product['supplier_id'] ?? '') == $supplier['id'] ? 'selected' : '' ?>>
+                        <?php foreach ($suppliers as $supplier) : ?>
 
-                            <?= esc($supplier['company_name']) ?>
+                            <option
+                                value="<?= $supplier['id'] ?>"
+                                <?= old('supplier_id', $product['supplier_id'] ?? '') == $supplier['id'] ? 'selected' : '' ?>>
 
-                        </option>
+                                <?= esc($supplier['company_name']) ?>
 
-                    <?php endforeach; ?>
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    <?php endif; ?>
 
                 </select>
-
             </div>
 
             <!-- Brand -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Brand
-                </label>
+                <label class="form-label fw-semibold">Brand</label>
 
                 <input
                     type="text"
                     name="brand"
                     class="form-control"
                     value="<?= old('brand', $product['brand'] ?? '') ?>">
-
             </div>
 
             <!-- Unit -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Unit
-                </label>
+                <label class="form-label fw-semibold">Unit</label>
 
                 <input
                     type="text"
                     name="unit"
                     class="form-control"
                     value="<?= old('unit', $product['unit'] ?? 'Piece') ?>">
-
             </div>
 
             <!-- Cost Price -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Cost Price (KES)
-                </label>
+                <label class="form-label fw-semibold">Cost Price (KES)</label>
 
                 <input
                     type="number"
@@ -154,15 +131,11 @@
                     class="form-control"
                     value="<?= old('cost_price', $product['cost_price'] ?? '') ?>"
                     required>
-
             </div>
 
             <!-- Selling Price -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Selling Price (KES)
-                </label>
+                <label class="form-label fw-semibold">Selling Price (KES)</label>
 
                 <input
                     type="number"
@@ -171,15 +144,11 @@
                     class="form-control"
                     value="<?= old('selling_price', $product['selling_price'] ?? '') ?>"
                     required>
-
             </div>
 
-            <!-- Current Stock -->
+            <!-- Stock -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Current Stock
-                </label>
+                <label class="form-label fw-semibold">Current Stock</label>
 
                 <input
                     type="number"
@@ -187,15 +156,11 @@
                     class="form-control"
                     value="<?= old('stock', $product['stock'] ?? 0) ?>"
                     required>
-
             </div>
 
             <!-- Minimum Stock -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Minimum Stock
-                </label>
+                <label class="form-label fw-semibold">Minimum Stock</label>
 
                 <input
                     type="number"
@@ -203,15 +168,11 @@
                     class="form-control"
                     value="<?= old('min_stock', $product['min_stock'] ?? 5) ?>"
                     required>
-
             </div>
 
             <!-- Status -->
             <div class="col-md-6 mb-3">
-
-                <label class="form-label fw-semibold">
-                    Status
-                </label>
+                <label class="form-label fw-semibold">Status</label>
 
                 <select
                     name="status"
@@ -220,21 +181,16 @@
                     <option
                         value="Active"
                         <?= old('status', $product['status'] ?? 'Active') == 'Active' ? 'selected' : '' ?>>
-
                         Active
-
                     </option>
 
                     <option
                         value="Inactive"
                         <?= old('status', $product['status'] ?? '') == 'Inactive' ? 'selected' : '' ?>>
-
                         Inactive
-
                     </option>
 
                 </select>
-
             </div>
 
         </div>
