@@ -36,7 +36,7 @@ class PurchaseModel extends Model
      */
     public function getPurchases()
     {
-        return $this->select('purchases.*, suppliers.company_name AS supplier_name')
+        return $this->select('purchases.*, suppliers.company_name AS company_name')
             ->join('suppliers', 'suppliers.id = purchases.supplier_id')
             ->orderBy('purchases.id', 'DESC')
             ->findAll();
@@ -47,7 +47,7 @@ class PurchaseModel extends Model
      */
     public function getPurchase($id)
     {
-        return $this->select('purchases.*, suppliers.company_name AS supplier_name')
+        return $this->select('purchases.*, suppliers.company_name AS company_name')
             ->join('suppliers', 'suppliers.id = purchases.supplier_id')
             ->where('purchases.id', $id)
             ->first();

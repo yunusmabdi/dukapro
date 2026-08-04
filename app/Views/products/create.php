@@ -33,6 +33,7 @@
         <?= view('products/_form', [
             'product' => [],
             'categories' => $categories,
+            'suppliers' => $suppliers,
         ]) ?>
 
     </form>

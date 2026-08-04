@@ -42,3 +42,19 @@ $routes->post('suppliers/update/(:num)','Suppliers::update/$1');
 $routes->get('suppliers/delete/(:num)','Suppliers::delete/$1');
 
 $routes->get('inventory', 'Inventory::index');
+
+// Purchases
+$routes->get('purchases', 'PurchaseController::index');
+$routes->get('purchases/create', 'PurchaseController::create');
+$routes->post('purchases/store', 'PurchaseController::store');
+
+$routes->get('purchases/show/(:num)', 'PurchaseController::show/$1');
+
+$routes->get('purchases/edit/(:num)', 'PurchaseController::edit/$1');
+$routes->post('purchases/update/(:num)', 'PurchaseController::update/$1');
+
+$routes->get('purchases/delete/(:num)', 'PurchaseController::delete/$1');
+
+$routes->post('purchases/receive/(:num)', 'PurchaseController::receive/$1');
+
+$routes->post('purchases/cancel/(:num)', 'PurchaseController::cancel/$1');

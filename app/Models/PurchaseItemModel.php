@@ -35,7 +35,16 @@ class PurchaseItemModel extends Model
      */
     public function getItemsByPurchase($purchaseId)
     {
-        return $this->select('purchase_items.*, products.product_name')
+        return $this->select('
+                purchase_items.id,
+                purchase_items.purchase_id,
+                purchase_items.product_id,
+                purchase_items.quantity,
+                purchase_items.unit_cost,
+                purchase_items.subtotal,
+                products.name AS product_name,
+                products.sku
+            ')
             ->join('products', 'products.id = purchase_items.product_id')
             ->where('purchase_items.purchase_id', $purchaseId)
             ->findAll();
