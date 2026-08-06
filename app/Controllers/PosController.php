@@ -2,12 +2,29 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
+use App\Models\CategoryModel;
+use App\Models\ProductModel;
 
 class PosController extends BaseController
 {
     public function index()
     {
-        return view('pos/index');
+        $categoryModel = new CategoryModel();
+        $productModel  = new ProductModel();
+
+        $categories = $categoryModel
+            ->orderBy('name', 'ASC')
+            ->findAll();
+
+        $products = $productModel
+            ->select('products.*, categories.name AS category_name')
+            ->join('categories', 'categories.id = products.category_id', 'left')
+            ->orderBy('products.name', 'ASC')
+            ->findAll();
+
+        return view('pos/index', [
+            'categories' => $categories,
+            'products'   => $products,
+        ]);
     }
 }

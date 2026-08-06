@@ -109,3 +109,5 @@ $routes->get('receipt/(:any)', 'InvoiceController::receipt/$1');
 // =====================================
 
 $routes->post('customers/quick-add', 'CustomerController::store');
+
+$routes->post('cart/add', 'CartController::add');

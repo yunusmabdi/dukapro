@@ -8,8 +8,11 @@
         </div>
 
         <div>
+
             <h3>NexusERP</h3>
+
             <small>Enterprise Suite</small>
+
         </div>
 
     </div>
@@ -21,7 +24,7 @@
 
         <div>
 
-            <h4>Administrator</h4>
+            <h4><?= session('name') ?? 'Administrator' ?></h4>
 
             <p>
 
@@ -37,17 +40,14 @@
 
     <?php $segment = service('uri')->getSegment(1); ?>
 
-    <!-- ================= MAIN ================= -->
-
+    <!-- MAIN -->
     <span class="menu-title">MAIN</span>
 
     <ul class="sidebar-menu">
 
         <li>
 
-            <a
-                href="<?= base_url() ?>"
-                class="<?= $segment === '' ? 'active' : '' ?>">
+            <a href="<?= base_url() ?>" class="<?= $segment === '' ? 'active' : '' ?>">
 
                 <i class="bi bi-speedometer2"></i>
 
@@ -59,113 +59,81 @@
 
     </ul>
 
-    <!-- ================= INVENTORY ================= -->
-
+    <!-- INVENTORY -->
     <span class="menu-title">INVENTORY</span>
 
     <ul class="sidebar-menu">
 
         <li>
-
-            <a
-                href="<?= base_url('products') ?>"
-                class="<?= $segment === 'products' ? 'active' : '' ?>">
-
+            <a href="<?= base_url('products') ?>" class="<?= $segment === 'products' ? 'active' : '' ?>">
                 <i class="bi bi-box"></i>
-
                 <span>Products</span>
-
             </a>
-
         </li>
 
         <li>
-
-            <a
-                href="<?= base_url('categories') ?>"
-                class="<?= $segment === 'categories' ? 'active' : '' ?>">
-
+            <a href="<?= base_url('categories') ?>" class="<?= $segment === 'categories' ? 'active' : '' ?>">
                 <i class="bi bi-tags"></i>
-
                 <span>Categories</span>
-
             </a>
-
         </li>
 
         <li>
-
-            <a
-                href="<?= base_url('suppliers') ?>"
-                class="<?= $segment === 'suppliers' ? 'active' : '' ?>">
-
+            <a href="<?= base_url('suppliers') ?>" class="<?= $segment === 'suppliers' ? 'active' : '' ?>">
                 <i class="bi bi-truck"></i>
-
                 <span>Suppliers</span>
-
             </a>
-
         </li>
 
         <li>
-
-            <a
-                href="<?= base_url('inventory') ?>"
-                class="<?= $segment === 'inventory' ? 'active' : '' ?>">
-
+            <a href="<?= base_url('inventory') ?>" class="<?= $segment === 'inventory' ? 'active' : '' ?>">
                 <i class="bi bi-boxes"></i>
-
                 <span>Inventory</span>
-
             </a>
+        </li>
 
+        <li>
+            <a href="<?= base_url('purchases') ?>" class="<?= $segment === 'purchases' ? 'active' : '' ?>">
+                <i class="bi bi-cart-check"></i>
+                <span>Purchases</span>
+            </a>
         </li>
 
     </ul>
 
-    <!-- ================= SALES ================= -->
-
+    <!-- SALES -->
     <span class="menu-title">SALES</span>
 
     <ul class="sidebar-menu">
 
         <li>
-
-            <a
-                href="<?= base_url('sales') ?>"
-                class="<?= $segment === 'sales' ? 'active' : '' ?>">
-
-                <i class="bi bi-shop"></i>
-
-                <span>Sales</span>
-
+            <a href="<?= base_url('customers') ?>" class="<?= $segment === 'customers' ? 'active' : '' ?>">
+                <i class="bi bi-people"></i>
+                <span>Customers</span>
             </a>
-
         </li>
 
         <li>
-
-            <a
-                href="<?= base_url('purchases') ?>"
-                class="<?= $segment === 'purchases' ? 'active' : '' ?>">
-
-                <i class="bi bi-cart-check"></i>
-
-                <span>Purchases</span>
-
-            </a>
-
-        </li>
-
-        <li>
-
-            <a
-                href="<?= base_url('invoices') ?>"
-                class="<?= $segment === 'invoices' ? 'active' : '' ?>">
-
+            <a href="<?= base_url('invoices') ?>" class="<?= $segment === 'invoices' ? 'active' : '' ?>">
                 <i class="bi bi-receipt"></i>
-
                 <span>Invoices</span>
+            </a>
+        </li>
+
+    </ul>
+
+    <!-- POS -->
+    <span class="menu-title">POINT OF SALE</span>
+
+    <ul class="sidebar-menu">
+
+        <li>
+
+            <a href="<?= base_url('pos') ?>">
+
+                <i class="bi bi-cart4"></i>
+
+                <span>Launch POS</span>
 
             </a>
 
@@ -173,66 +141,37 @@
 
     </ul>
 
-    <!-- ================= SYSTEM ================= -->
-
+    <!-- SYSTEM -->
     <span class="menu-title">SYSTEM</span>
 
     <ul class="sidebar-menu">
 
         <li>
-
-            <a
-                href="<?= base_url('users') ?>"
-                class="<?= $segment === 'users' ? 'active' : '' ?>">
-
-                <i class="bi bi-people"></i>
-
+            <a href="<?= base_url('users') ?>" class="<?= $segment === 'users' ? 'active' : '' ?>">
+                <i class="bi bi-people-fill"></i>
                 <span>Users</span>
-
             </a>
-
         </li>
 
         <li>
-
-            <a
-                href="<?= base_url('roles') ?>"
-                class="<?= $segment === 'roles' ? 'active' : '' ?>">
-
+            <a href="<?= base_url('roles') ?>" class="<?= $segment === 'roles' ? 'active' : '' ?>">
                 <i class="bi bi-shield-lock"></i>
-
                 <span>Roles</span>
-
             </a>
-
         </li>
 
         <li>
-
-            <a
-                href="<?= base_url('reports') ?>"
-                class="<?= $segment === 'reports' ? 'active' : '' ?>">
-
-                <i class="bi bi-clipboard-data"></i>
-
+            <a href="<?= base_url('reports') ?>" class="<?= $segment === 'reports' ? 'active' : '' ?>">
+                <i class="bi bi-bar-chart"></i>
                 <span>Reports</span>
-
             </a>
-
         </li>
 
         <li>
-
-            <a
-                href="<?= base_url('settings') ?>"
-                class="<?= $segment === 'settings' ? 'active' : '' ?>">
-
+            <a href="<?= base_url('settings') ?>" class="<?= $segment === 'settings' ? 'active' : '' ?>">
                 <i class="bi bi-gear"></i>
-
                 <span>Settings</span>
-
             </a>
-
         </li>
 
     </ul>
