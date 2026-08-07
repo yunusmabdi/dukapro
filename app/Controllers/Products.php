@@ -67,9 +67,21 @@ class Products extends BaseController
      * Save product
      */
     public function store()
-    {   
+    {
+
+        $imageName = null;
+
+        $image = $this->request->getFile('image');
+
+        if ($image && $image->isValid() && ! $image->hasMoved()) {
+
+            $imageName = $image->getRandomName();
+
+            $image->move(FCPATH . 'assets/images/products', $imageName);
+        }
+
         $this->productModel->save([
-            
+
             'sku'            => $this->productModel->generateSku(),
             'barcode'        => $this->productModel->generateBarcode(),
             'name'           => $this->request->getPost('name'),
@@ -82,6 +94,8 @@ class Products extends BaseController
             'stock'          => $this->request->getPost('stock'),
             'min_stock'      => $this->request->getPost('min_stock'),
             'status'         => $this->request->getPost('status'),
+            'image'          => $imageName,
+
         ]);
 
         return redirect()->to('/products')
@@ -94,7 +108,6 @@ class Products extends BaseController
     public function edit($id)
     {
         $data = [
-
             'title' => 'Edit Product',
 
             'product' => $this->productModel->find($id),
@@ -104,7 +117,11 @@ class Products extends BaseController
                 ->orderBy('name')
                 ->findAll(),
 
+            'suppliers' => $this->supplierModel
+                ->orderBy('company_name')
+                ->findAll(),
         ];
+
         return view('products/edit', $data);
     }
 
@@ -113,9 +130,29 @@ class Products extends BaseController
      */
     public function update($id)
     {
+        $product = $this->productModel->find($id);
+
+        $imageName = $product['image'];
+
+        $image = $this->request->getFile('image');
+
+        if ($image && $image->isValid() && ! $image->hasMoved()) {
+
+            // delete old image
+            if (
+                ! empty($product['image']) &&
+                file_exists(FCPATH . 'assets/images/products/' . $product['image'])
+            ) {
+                unlink(FCPATH . 'assets/images/products/' . $product['image']);
+            }
+
+            $imageName = $image->getRandomName();
+
+            $image->move(FCPATH . 'assets/images/products', $imageName);
+        }
+
         $this->productModel->update($id, [
-            'sku'            => $this->request->getPost('sku'),
-            'barcode'        => $this->request->getPost('barcode'),
+
             'name'           => $this->request->getPost('name'),
             'category_id'    => $this->request->getPost('category_id'),
             'supplier_id'    => $this->request->getPost('supplier_id'),
@@ -126,6 +163,8 @@ class Products extends BaseController
             'stock'          => $this->request->getPost('stock'),
             'min_stock'      => $this->request->getPost('min_stock'),
             'status'         => $this->request->getPost('status'),
+            'image'          => $imageName,
+
         ]);
 
         return redirect()->to('/products')

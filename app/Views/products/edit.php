@@ -33,7 +33,7 @@
 
         <div class="card-body">
 
-            <form action="<?= base_url('products/update/' . $product['id']) ?>" method="post">
+            <form action="<?= base_url('products/update/' . $product['id']) ?>" method="post" enctype="multipart/form-data">
 
                 <?= $this->include('products/_form') ?>
 

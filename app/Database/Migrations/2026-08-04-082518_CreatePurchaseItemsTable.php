@@ -10,27 +10,27 @@ class CreatePurchaseItemsTable extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
+                'type'           => 'BIGINT',
+                'constraint'     => 20,
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
 
             'purchase_id' => [
-                'type'       => 'INT',
-                'constraint' => 11,
+                'type'       => 'BIGINT',
+                'constraint' => 20,
                 'unsigned'   => true,
             ],
 
             'product_id' => [
-                'type'       => 'INT',
-                'constraint' => 11,
+                'type'       => 'BIGINT',
+                'constraint' => 20,
                 'unsigned'   => true,
             ],
 
             'quantity' => [
-                'type'       => 'INT',
-                'constraint' => 11,
+                'type'       => 'BIGINT',
+                'constraint' => 20,
                 'unsigned'   => true,
             ],
 

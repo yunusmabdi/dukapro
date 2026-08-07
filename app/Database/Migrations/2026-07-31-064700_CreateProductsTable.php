@@ -11,7 +11,7 @@ class CreateProductsTable extends Migration
         $this->forge->addField([
             'id' => [
                 'type' => 'BIGINT',
-                'constraint' => 11,
+                'constraint' => 20,
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
@@ -33,9 +33,10 @@ class CreateProductsTable extends Migration
                 'constraint' => 255,
             ],
 
-            'category' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100,
+            'category_id' => [
+                'type' => 'BIGINT',
+                'constraint' => 20,
+                'unsigned' => true,
             ],
 
             'brand' => [
@@ -92,6 +93,6 @@ class CreateProductsTable extends Migration
 
     public function down()
     {
-        //
+        $this->forge->dropTable('products', true);
     }
 }

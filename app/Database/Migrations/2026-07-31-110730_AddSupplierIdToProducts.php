@@ -12,8 +12,8 @@ class AddSupplierIdToProducts extends Migration
 
             'supplier_id' => [
 
-                'type'       => 'INT',
-                'constraint' => 11,
+                'type'       => 'BIGINT',
+                'constraint' => 20,
                 'unsigned'   => true,
                 'after'      => 'category_id'
 

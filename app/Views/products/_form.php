@@ -15,6 +15,47 @@
                     readonly>
             </div>
 
+            <!-- Product Image -->
+            <div class="col-md-6">
+
+                <label class="form-label fw-semibold">
+                    Product Image
+                    <small class="text-muted">(Optional)</small>
+                </label>
+
+                <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    class="form-control"
+                    accept="image/*">
+
+                <small class="text-muted">
+                    JPG, PNG or WEBP. Recommended size: 600 × 600px.
+                </small>
+
+            </div>
+
+            <div class="col-md-6 text-center">
+
+                <label class="form-label fw-semibold d-block">
+                    Preview
+                </label>
+
+                <?php
+                    $image = !empty($product['image'])
+                        ? base_url('assets/images/products/' . $product['image'])
+                        : base_url('assets/images/no-image.png');
+                ?>
+
+                <img
+                    id="imagePreview"
+                    src="<?= $image ?>"
+                    class="img-fluid rounded border"
+                    style="max-height:180px; object-fit:contain;">
+
+            </div>
+
             <!-- Barcode -->
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-semibold">Barcode</label>

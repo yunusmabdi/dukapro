@@ -10,8 +10,8 @@ class CreateSuppliersTable extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type'           => 'INT',
-                'constraint'     => 11,
+                'type'           => 'BIGINT',
+                'constraint'     => 20,
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
@@ -76,6 +76,6 @@ class CreateSuppliersTable extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('suppliers');
+        $this->forge->dropTable('suppliers', true);
     }
 }

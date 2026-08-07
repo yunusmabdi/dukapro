@@ -28,7 +28,7 @@
 
     </div>
 
-    <form action="<?= base_url('products/store') ?>" method="post">
+    <form action="<?= base_url('products/store') ?>" method="post" enctype="multipart/form-data">
 
         <?= view('products/_form', [
             'product' => [],

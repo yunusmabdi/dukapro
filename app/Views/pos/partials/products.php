@@ -59,7 +59,7 @@
 
             <div
                 class="col-12 col-sm-6 col-lg-4 mb-4 product-item"
-                data-category="<?= $product['category_id'] ?>>"
+                data-category="<?= $product['category_id'] ?>"
                 data-name = "<?= strtolower($product['name']) ?>"
                 data-sku = "<?= strtolower($product['sku']) ?>"
                 data-barcode = "<?= strtolower($product['barcode'] ?? '') ?>">
@@ -72,7 +72,7 @@
                         <?php if (! empty($product['image'])): ?>
 
                             <img
-                                src="<?= base_url('uploads/products/' . $product['image']) ?>"
+                                src="<?= base_url('assets/images/products/' . $product['image']) ?>"
                                 class="img-fluid"
                                 alt="<?= esc($product['name']) ?>">
 
