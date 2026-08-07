@@ -1,3 +1,17 @@
+<?php
+
+$cart = session()->get('cart') ?? [];
+
+$subtotal = 0;
+
+foreach ($cart as $item) {
+    $subtotal += $item['price'] * $item['quantity'];
+}
+
+$discount = 0;
+$tax = $subtotal * 0.16;
+$total = $subtotal + $tax - $discount;
+?>
 <div class="checkout-summary">
 
     <!-- Summary -->
@@ -10,7 +24,7 @@
             </span>
 
             <strong>
-                KES 4,800.00
+                KES <?= number_format($subtotal, 2) ?>
             </strong>
 
         </div>
@@ -22,7 +36,7 @@
             </span>
 
             <strong class="text-success">
-                -KES 200.00
+                -KES <?= number_format($discount, 2) ?>
             </strong>
 
         </div>
@@ -34,7 +48,7 @@
             </span>
 
             <strong>
-                KES 768.00
+                KES <?= number_format($tax, 2) ?>
             </strong>
 
         </div>
@@ -48,7 +62,7 @@
             </h5>
 
             <h4 class="fw-bold text-primary mb-0">
-                KES 5,368.00
+                KES <?= number_format($total, 2) ?>
             </h4>
 
         </div>

@@ -16,57 +16,46 @@
     </section>
 
 
-
-    <!-- POS Main Area -->
+    <!-- POS Main Content -->
     <div class="row g-4">
 
 
-        <!-- Product Area -->
+        <!-- Products -->
         <div class="col-lg-8">
-
 
             <div class="card border-0 shadow-sm rounded-4">
 
-
                 <div class="card-body">
-
 
                     <?= $this->include('pos/partials/products') ?>
 
-
                 </div>
 
-
             </div>
-
 
         </div>
 
 
-
-
-        <!-- Cart & Checkout Area -->
+        <!-- Cart & Checkout -->
         <div class="col-lg-4">
-
 
             <div class="sticky-lg-top" style="top:20px;">
 
+                <!-- Shopping Cart -->
+                <div id="cart-container">
 
-                <?= $this->include('pos/partials/cart') ?>
-
-
-
-                <div class="mt-3">
-
-
-                    <?= $this->include('pos/partials/checkout') ?>
-
+                    <?= $this->include('pos/partials/cart') ?>
 
                 </div>
 
+                <!-- Checkout -->
+                <div class="mt-3" id="checkout-container">
+
+                    <?= $this->include('pos/partials/checkout') ?>
+
+                </div>
 
             </div>
-
 
         </div>
 
@@ -81,74 +70,7 @@
 
 <!-- Customer Selection Modal -->
 <?= $this->include('pos/partials/customer_modal') ?>
-
-
-
-<!-- POS Scripts -->
-<?= $this->section('scripts') ?>
-
-<script>
-
-document.querySelectorAll('.add-to-cart')
-.forEach(button => {
-
-
-    button.addEventListener('click', function(){
-
-
-        let productId = this.dataset.id;
-
-
-        fetch("<?= base_url('cart/add') ?>", {
-
-            method: "POST",
-
-            headers: {
-
-                "Content-Type": "application/x-www-form-urlencoded",
-
-                "X-Requested-With": "XMLHttpRequest"
-
-            },
-
-            body: "product_id=" + productId
-
-
-        })
-
-        .then(response => response.json())
-
-        .then(data => {
-
-
-            if(data.status){
-
-
-                alert(data.message);
-
-
-            } else {
-
-
-                alert(data.message);
-
-
-            }
-
-
-        });
-
-
-    });
-
-
-});
-
-
-</script>
-
-
 <?= $this->endSection() ?>
 
 
-<?= $this->endSection() ?>
+<script src="<?= base_url('assets/js/POS.js') ?>"></script>

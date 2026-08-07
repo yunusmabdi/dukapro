@@ -1,7 +1,22 @@
-<div class="card border-0 shadow-sm rounded-4 h-100">
+<?php
 
-    <!-- Header -->
-    <div class="card-header bg-white border-0 py-3">
+$cart = session()->get('cart') ?? [];
+
+$count = 0;
+$subtotal = 0;
+
+foreach ($cart as $item) {
+
+    $count += $item['quantity'];
+    $subtotal += $item['price'] * $item['quantity'];
+
+}
+
+?>
+
+<div class="card border-0 shadow-sm rounded-4">
+
+    <div class="card-header bg-white">
 
         <div class="d-flex justify-content-between align-items-center">
 
@@ -13,140 +28,132 @@
 
                 <small class="text-muted">
 
-                    <span id="cart-count">0</span> Items
+                    <?= $count ?> Item<?= $count == 1 ? '' : 's' ?>
 
                 </small>
 
             </div>
 
-            <button
-                class="btn btn-sm btn-outline-danger"
-                id="clear-cart">
+            <form action="<?= base_url('cart/clear') ?>" method="post">
 
-                <i class="bi bi-trash3 me-1"></i>
+                <button class="btn btn-outline-danger btn-sm">
 
-                Clear
+                    <i class="bi bi-trash"></i>
 
-            </button>
+                </button>
+
+            </form>
 
         </div>
 
     </div>
 
-    <!-- Cart Items -->
-    <div
-        class="card-body"
-        id="cart-items">
+    <div class="card-body">
 
-        <!-- Empty State -->
+        <?php if (empty($cart)): ?>
 
-        <div
-            class="text-center py-5"
-            id="cart-empty">
+            <div class="text-center py-5">
 
-            <i class="bi bi-cart-x display-3 text-secondary"></i>
+                <i class="bi bi-cart-x display-4 text-secondary"></i>
 
-            <h6 class="mt-3 fw-semibold">
+                <p class="text-muted mt-3">
 
-                Cart is Empty
+                    Cart is Empty
 
-            </h6>
+                </p>
 
-            <p class="text-muted mb-0">
+            </div>
 
-                Select products to begin a sale.
+        <?php else: ?>
 
-            </p>
+            <?php foreach ($cart as $item): ?>
 
-        </div>
+                <?php $lineTotal = $item['price'] * $item['quantity']; ?>
 
-        <!-- Cart Item Template -->
-        <!-- Hidden until JS renders -->
+                <div class="border-bottom py-3">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h6 class="fw-semibold mb-1">
+
+                                <?= esc($item['name']) ?>
+
+                            </h6>
+
+                            <small class="text-muted">
+
+                                KES <?= number_format($item['price'],2) ?>
+
+                            </small>
+
+                        </div>
+
+                        <form action="<?= base_url('cart/remove') ?>" method="post">
+
+                            <input
+                                type="hidden"
+                                name="product_id"
+                                value="<?= $item['product_id'] ?>">
+
+                            <button class="btn btn-sm btn-outline-danger">
+
+                                <i class="bi bi-x-lg"></i>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-2">
+
+                        <span class="badge bg-primary">
+
+                            x<?= $item['quantity'] ?>
+
+                        </span>
+
+                        <strong>
+
+                            KES <?= number_format($lineTotal,2) ?>
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
 
     </div>
 
-    <!-- Totals -->
+    <div class="card-footer bg-white">
 
-    <div class="border-top px-4 py-3">
+        <div class="d-flex justify-content-between">
 
-        <div class="d-flex justify-content-between mb-2">
+            <span>Items</span>
 
-            <span class="text-muted">
-
-                Subtotal
-
-            </span>
-
-            <strong id="subtotal">
-
-                KES 0.00
-
-            </strong>
-
-        </div>
-
-        <div class="d-flex justify-content-between mb-2">
-
-            <span class="text-muted">
-
-                Discount
-
-            </span>
-
-            <span>
-
-                KES 0.00
-
-            </span>
-
-        </div>
-
-        <div class="d-flex justify-content-between mb-3">
-
-            <span class="text-muted">
-
-                Tax
-
-            </span>
-
-            <span>
-
-                KES 0.00
-
-            </span>
+            <strong><?= $count ?></strong>
 
         </div>
 
         <hr>
 
-        <div class="d-flex justify-content-between mb-4">
+        <div class="d-flex justify-content-between">
 
-            <h5 class="fw-bold">
+            <h5>Total</h5>
 
-                Total
+            <h5 class="text-primary">
+
+                KES <?= number_format($subtotal,2) ?>
 
             </h5>
 
-            <h4
-                class="fw-bold text-primary"
-                id="total">
-
-                KES 0.00
-
-            </h4>
-
         </div>
-
-        <button
-            class="btn btn-primary w-100 py-3"
-            id="checkout-btn"
-            disabled>
-
-            <i class="bi bi-credit-card me-2"></i>
-
-            Complete Sale
-
-        </button>
 
     </div>
 

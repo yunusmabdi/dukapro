@@ -42,9 +42,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- POS -->
-     <script>window.BASE_URL = "<?= base_url() ?>";</script>
+    <script>window.BASE_URL = "<?= base_url() ?>";</script>
     <script src="<?= base_url('assets/js/pos.js') ?>"></script>
-    <?= $this->renderSection('scripts') ?>
 </body>
 
 </html>

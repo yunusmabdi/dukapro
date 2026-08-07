@@ -50,56 +50,205 @@ body{
     min-height:100vh;
 
 }
+/* ==========================================================
+   POS TOPBAR BUTTONS
+========================================================== */
+
+.pos-topbar .btn {
+
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 18px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+
+.pos-topbar .btn i {
+
+    font-size: 1rem;
+
+    line-height: 1;
+
+    flex-shrink: 0;
+
+}
+
+
+.pos-topbar .btn span {
+
+    line-height: 1;
+
+}
+
 
 /* ==========================================================
-   Topbar
-   ========================================================== */
+   Customer Button
+========================================================== */
 
-.pos-topbar{
+.pos-topbar .btn-light {
 
-    background:#fff;
+    background: #ffffff;
 
-    border-bottom:1px solid var(--border);
+    border: 1px solid var(--border);
 
-    padding:16px 28px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
-    box-shadow:0 2px 12px rgba(0,0,0,.04);
+    color: var(--text);
 
 }
 
-.pos-topbar .form-control{
 
-    height:48px;
+.pos-topbar .btn-light:hover {
 
-    border-radius:12px;
-
-}
-
-.pos-topbar .input-group-text{
-
-    height:48px;
-
-    border-radius:12px 0 0 12px;
+    background: #f9fafb;
 
 }
 
-.pos-topbar .btn{
 
-    height:48px;
 
-    border-radius:12px;
+/* ==========================================================
+   New Customer Button
+========================================================== */
+
+.pos-topbar .btn-primary {
+
+    background: var(--primary);
+
+    border: 1px solid var(--primary);
+
+    color: #ffffff;
+
+    min-width: 90px;
+
+}
+
+
+.pos-topbar .btn-primary:hover {
+
+    background: var(--primary-dark);
+
+    border-color: var(--primary-dark);
+
+}
+
+
+
+/* ==========================================================
+   Cart Button
+========================================================== */
+
+.pos-topbar .cart-button {
+
+    width: 48px;
+
+    min-width: 48px;
+
+    height: 48px;
+
+    padding: 0;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    color: var(--primary);
+
+    position: relative;
+
+}
+
+
+.pos-topbar .cart-button:hover {
+
+    background: #eff6ff;
+
+    border-color: var(--primary);
+
+}
+
+
+
+/* Cart Badge */
+
+.pos-topbar .cart-button .badge {
+
+    position: absolute;
+
+    top: 0;
+
+    right: 0;
+
+    transform: translate(40%, -40%);
+
+    min-width: 22px;
+
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    font-size: .7rem;
+
+    z-index: 10;
+
+}
+
+
+
+/* ==========================================================
+   Cashier Profile
+========================================================== */
+
+.pos-topbar .cashier-info {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.pos-topbar .cashier-info small {
+
+    color: var(--muted);
+
+}
+
+
+
+/* ==========================================================
+   Exit Button
+========================================================== */
+
+.pos-topbar .btn-outline-secondary {
+
+    border-radius: 12px;
+
+    border-color: var(--border);
+
+    color: var(--text);
+
+}
+
+
+.pos-topbar .btn-outline-secondary:hover {
+
+    background: #f3f4f6;
 
 }
 

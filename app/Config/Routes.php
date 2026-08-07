@@ -89,6 +89,8 @@ $routes->post('cart/update', 'CartController::update');
 $routes->post('cart/remove', 'CartController::remove');
 $routes->post('cart/clear', 'CartController::clear');
 
+$routes->get('cart/contents', 'CartController::contents');
+
 // =====================================
 // Checkout
 // =====================================
@@ -109,5 +111,3 @@ $routes->get('receipt/(:any)', 'InvoiceController::receipt/$1');
 // =====================================
 
 $routes->post('customers/quick-add', 'CustomerController::store');
-
-$routes->post('cart/add', 'CartController::add');

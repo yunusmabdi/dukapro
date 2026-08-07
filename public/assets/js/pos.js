@@ -1,62 +1,78 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('click', function (e) {
+
+    const button = e.target.closest('.add-to-cart');
+
+    if (!button) return;
+
+    const form = document.createElement('form');
+
+    form.method = 'POST';
+    form.action = window.BASE_URL + 'cart/add';
+
+    const input = document.createElement('input');
+
+    input.type = 'hidden';
+    input.name = 'product_id';
+    input.value = button.dataset.id;
+
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
 
 
-    document.querySelectorAll('.add-to-cart').forEach(button => {
+    // Category filtering
+
+    const categoryButtons = document.querySelectorAll(".category-pill");
+    const productItems = document.querySelectorAll(".product-item");
 
 
-        button.addEventListener('click', function () {
+    categoryButtons.forEach(button => {
 
 
-            let productId = this.dataset.id;
+        button.addEventListener("click", function () {
 
 
-            fetch(window.BASE_URL + 'cart/add', {
+            let selectedCategory = this.dataset.category;
 
 
-                method: 'POST',
+            // Active button
+
+            categoryButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
 
 
-                headers: {
-
-                    'Content-Type': 'application/x-www-form-urlencoded',
-
-                    'X-Requested-With': 'XMLHttpRequest'
-
-                },
+            this.classList.add("active");
 
 
-                body: 'product_id=' + productId
+
+            // Products
+
+            productItems.forEach(product => {
 
 
-            })
+                let productCategory = product.dataset.category;
 
 
-            .then(response => response.json())
+                if (
+                    selectedCategory === "all" ||
+                    selectedCategory === productCategory
+                ) {
 
-
-            .then(data => {
-
-
-                console.log(data);
-
-
-                if(data.status){
-
-                    alert(data.message);
+                    product.style.display = "block";
 
                 } else {
 
-                    alert(data.message);
+                    product.style.display = "none";
 
                 }
 
-
-            })
-
-
-            .catch(error => {
-
-                console.error(error);
 
             });
 
