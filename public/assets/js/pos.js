@@ -82,5 +82,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
 });
+
+function updateCartCount()
+{
+    fetch('/pos/cart-count')
+        .then(response => response.json())
+        .then(data => {
+
+            document.getElementById('cartCount').innerText =
+                data.count;
+
+        });
+}

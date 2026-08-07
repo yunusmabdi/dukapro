@@ -75,15 +75,16 @@
 
                 </button>
 
-                <button
-                    class="btn btn-outline-primary position-relative d-flex align-items-center justify-content-center"
-                    style="width:48px;height:48px;min-width:48px;">
+                <button class="btn btn-dark position-relative"
+                        id="cartButton">
 
-                    <i class="bi bi-cart3 fs-5"></i>
+                    <i class="bi bi-cart3"></i>
+                    Cart
 
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        id="cartCount">
 
-                        <?= array_sum(array_column(session()->get('cart') ?? [], 'quantity')) ?>
+                        <?= count(session()->get('cart') ?? []) ?>
 
                     </span>
 

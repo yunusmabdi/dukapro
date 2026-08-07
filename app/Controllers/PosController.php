@@ -27,4 +27,12 @@ class PosController extends BaseController
             'products'   => $products,
         ]);
     }
+    public function cartCount()
+    {
+        $cart = session()->get('cart') ?? [];
+
+        return $this->response->setJSON([
+            'count' => count($cart)
+        ]);
+    }
 }
