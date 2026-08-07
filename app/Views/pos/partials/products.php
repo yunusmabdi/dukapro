@@ -59,7 +59,10 @@
 
             <div
                 class="col-12 col-sm-6 col-lg-4 mb-4 product-item"
-                data-category="<?= $product['category_id'] ?>">
+                data-category="<?= $product['category_id'] ?>>"
+                data-name = "<?= strtolower($product['name']) ?>"
+                data-sku = "<?= strtolower($product['sku']) ?>"
+                data-barcode = "<?= strtolower($product['barcode'] ?? '') ?>">
 
                 <div class="card border-0 shadow-sm rounded-4 h-100 product-card overflow-hidden">
 

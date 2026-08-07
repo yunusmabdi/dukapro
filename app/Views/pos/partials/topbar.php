@@ -44,6 +44,7 @@
 
                     <input
                         type="text"
+                        id="productSearch"
                         class="form-control border-start-0 shadow-none"
                         placeholder="Search product, SKU or Barcode...">
 

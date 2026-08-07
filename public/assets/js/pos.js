@@ -95,3 +95,64 @@ function updateCartCount()
 
         });
 }
+
+// Product Search
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchInput = document.getElementById('productSearch');
+
+
+    if(searchInput)
+    {
+
+        searchInput.addEventListener('keyup', function () {
+
+
+            let keyword = this.value.toLowerCase().trim();
+
+
+            let products = document.querySelectorAll('.product-item');
+
+
+            products.forEach(function(product){
+
+
+                let name =
+                    product.dataset.name ?? '';
+
+                let sku =
+                    product.dataset.sku ?? '';
+
+                let barcode =
+                    product.dataset.barcode ?? '';
+
+
+
+                if(
+                    name.includes(keyword) ||
+                    sku.includes(keyword) ||
+                    barcode.includes(keyword)
+                )
+                {
+
+                    product.style.display = '';
+
+                }
+                else
+                {
+
+                    product.style.display = 'none';
+
+                }
+
+
+            });
+
+
+        });
+
+
+    }
+
+
+});
