@@ -24,6 +24,7 @@ class PosController extends BaseController
 
         return view('pos/index', [
             'categories' => $categories,
+            
             'products'   => $products,
         ]);
     }
