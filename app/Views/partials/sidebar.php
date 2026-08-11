@@ -1,402 +1,528 @@
-<?php
+/* =========================================================
+   NEXUSERP SIDEBAR
+========================================================= */
 
-$segment = service('uri')->getSegment(1);
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
 
-$userRole = session('user_role');
-$userName = session('user_name') ?? 'User';
+    width: 255px;
+    height: 100vh;
 
-?>
+    display: flex;
+    flex-direction: column;
 
-<aside class="sidebar">
+    background: #ffffff;
+    border-right: 1px solid #e9ecef;
 
-    <!-- ========================================= -->
-    <!-- LOGO -->
-    <!-- ========================================= -->
+    z-index: 1000;
 
-    <div class="logo">
+    overflow: hidden;
+}
 
-        <div class="logo-icon">
-            <i class="bi bi-grid-fill"></i>
-        </div>
 
-        <div>
-            <h3>NexusERP</h3>
-            <small>Enterprise Suite</small>
-        </div>
+/* =========================================================
+   SIDEBAR TOP
+========================================================= */
 
-    </div>
+.sidebar-top {
+    flex: 1;
 
+    min-height: 0;
 
-    <!-- ========================================= -->
-    <!-- USER -->
-    <!-- ========================================= -->
+    overflow-y: auto;
 
-    <div class="user-card">
+    padding-bottom: 10px;
+}
 
-        <img
-            src="https://i.pravatar.cc/80"
-            alt="User"
-        >
+.sidebar-top::-webkit-scrollbar {
+    width: 4px;
+}
 
-        <div>
+.sidebar-top::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 10px;
+}
 
-            <h4><?= esc($userName) ?></h4>
 
-            <p>
+/* =========================================================
+   LOGO
+========================================================= */
 
-                <span class="status"></span>
+.logo {
+    height: 76px;
 
-                <?= esc($userRole ?? 'User') ?>
+    display: flex;
+    align-items: center;
 
-            </p>
+    padding: 0 22px;
 
-        </div>
+    border-bottom: 1px solid #f0f1f3;
+}
 
-    </div>
+.logo-icon {
+    width: 40px;
+    height: 40px;
 
+    min-width: 40px;
 
-    <?php if ($userRole === 'Administrator'): ?>
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    border-radius: 11px;
 
-        <!-- ===================================== -->
-        <!-- MAIN -->
-        <!-- ===================================== -->
+    background: #111827;
+    color: #ffffff;
 
-        <span class="menu-title">
-            MAIN
-        </span>
+    font-size: 18px;
 
-        <ul class="sidebar-menu">
+    margin-right: 11px;
+}
 
-            <li>
+.logo-text h3 {
+    margin: 0;
 
-                <a
-                    href="<?= base_url() ?>"
-                    class="<?= $segment === '' ? 'active' : '' ?>"
-                >
+    font-size: 18px;
+    font-weight: 800;
 
-                    <i class="bi bi-speedometer2"></i>
+    color: #111827;
 
-                    <span>Dashboard</span>
+    line-height: 1.1;
+}
 
-                </a>
+.logo-text small {
+    display: block;
 
-            </li>
+    margin-top: 3px;
 
-        </ul>
+    color: #9ca3af;
 
+    font-size: 10px;
 
-        <!-- ===================================== -->
-        <!-- INVENTORY -->
-        <!-- ===================================== -->
+    letter-spacing: .4px;
+}
 
-        <span class="menu-title">
-            INVENTORY
-        </span>
 
-        <ul class="sidebar-menu">
+/* =========================================================
+   USER CARD
+========================================================= */
 
-            <li>
+.user-card {
+    display: flex;
+    align-items: center;
 
-                <a
-                    href="<?= base_url('products') ?>"
-                    class="<?= $segment === 'products' ? 'active' : '' ?>"
-                >
+    margin: 15px 14px;
 
-                    <i class="bi bi-box"></i>
+    padding: 11px;
 
-                    <span>Products</span>
+    border-radius: 12px;
 
-                </a>
+    background: #f8f9fb;
+}
 
-            </li>
+.user-card img {
+    width: 38px;
+    height: 38px;
 
+    min-width: 38px;
 
-            <li>
+    object-fit: cover;
 
-                <a
-                    href="<?= base_url('categories') ?>"
-                    class="<?= $segment === 'categories' ? 'active' : '' ?>"
-                >
+    border-radius: 50%;
+}
 
-                    <i class="bi bi-tags"></i>
+.user-info {
+    min-width: 0;
 
-                    <span>Categories</span>
+    margin-left: 10px;
+}
 
-                </a>
+.user-info h4 {
+    display: block;
 
-            </li>
+    margin: 0;
 
+    color: #1f2937;
 
-            <li>
+    font-size: 13px;
 
-                <a
-                    href="<?= base_url('suppliers') ?>"
-                    class="<?= $segment === 'suppliers' ? 'active' : '' ?>"
-                >
+    font-weight: 600;
 
-                    <i class="bi bi-truck"></i>
+    white-space: nowrap;
 
-                    <span>Suppliers</span>
+    overflow: hidden;
 
-                </a>
+    text-overflow: ellipsis;
+}
 
-            </li>
+.user-info p {
+    display: flex;
+    align-items: center;
 
+    gap: 5px;
 
-            <li>
+    margin: 3px 0 0;
 
-                <a
-                    href="<?= base_url('inventory') ?>"
-                    class="<?= $segment === 'inventory' ? 'active' : '' ?>"
-                >
+    color: #9ca3af;
 
-                    <i class="bi bi-boxes"></i>
+    font-size: 11px;
+}
 
-                    <span>Inventory</span>
+.status {
+    width: 7px;
+    height: 7px;
 
-                </a>
+    display: inline-block;
 
-            </li>
+    background: #22c55e;
 
+    border-radius: 50%;
+}
 
-            <li>
 
-                <a
-                    href="<?= base_url('purchases') ?>"
-                    class="<?= $segment === 'purchases' ? 'active' : '' ?>"
-                >
+/* =========================================================
+   SECTION TITLES
+========================================================= */
 
-                    <i class="bi bi-cart-check"></i>
+.menu-title {
+    display: block;
 
-                    <span>Purchases</span>
+    padding: 14px 23px 7px;
 
-                </a>
+    color: #a0a6af;
 
-            </li>
+    font-size: 9px;
 
-        </ul>
+    font-weight: 800;
 
+    letter-spacing: 1px;
+}
 
-        <!-- ===================================== -->
-        <!-- SALES -->
-        <!-- ===================================== -->
 
-        <span class="menu-title">
-            SALES
-        </span>
+/* =========================================================
+   MENU
+========================================================= */
 
-        <ul class="sidebar-menu">
+.sidebar-menu {
+    list-style: none;
 
-            <li>
+    padding: 0 12px;
 
-                <a
-                    href="<?= base_url('customers') ?>"
-                    class="<?= $segment === 'customers' ? 'active' : '' ?>"
-                >
+    margin: 0;
+}
 
-                    <i class="bi bi-people"></i>
+.sidebar-menu li {
+    margin-bottom: 3px;
+}
 
-                    <span>Customers</span>
+.sidebar-menu a {
+    height: 42px;
 
-                </a>
+    display: flex;
+    align-items: center;
 
-            </li>
+    padding: 0 12px;
 
+    border-radius: 9px;
 
-            <li>
+    color: #68707d;
 
-                <a
-                    href="<?= base_url('invoices') ?>"
-                    class="<?= $segment === 'invoices' ? 'active' : '' ?>"
-                >
+    text-decoration: none;
 
-                    <i class="bi bi-receipt"></i>
+    font-size: 13px;
 
-                    <span>Invoices</span>
+    font-weight: 500;
 
-                </a>
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
 
-            </li>
+.sidebar-menu a i {
+    width: 23px;
 
-        </ul>
+    margin-right: 9px;
 
+    font-size: 16px;
 
-        <!-- ===================================== -->
-        <!-- POINT OF SALE -->
-        <!-- ===================================== -->
+    text-align: center;
+}
 
-        <span class="menu-title">
-            POINT OF SALE
-        </span>
+.sidebar-menu a:hover {
+    background: #f4f5f7;
 
-        <ul class="sidebar-menu">
+    color: #111827;
 
-            <li>
+    transform: translateX(2px);
+}
 
-                <a
-                    href="<?= base_url('pos') ?>"
-                    class="<?= $segment === 'pos' ? 'active' : '' ?>"
-                >
 
-                    <i class="bi bi-cart4"></i>
+/* =========================================================
+   ACTIVE MENU
+========================================================= */
 
-                    <span>Launch POS</span>
+.sidebar-menu a.active {
+    background: #111827;
 
-                </a>
+    color: #ffffff;
 
-            </li>
+    font-weight: 600;
+}
 
-        </ul>
+.sidebar-menu a.active:hover {
+    background: #111827;
 
+    color: #ffffff;
 
-        <!-- ===================================== -->
-        <!-- SYSTEM -->
-        <!-- ===================================== -->
+    transform: none;
+}
 
-        <span class="menu-title">
-            SYSTEM
-        </span>
 
-        <ul class="sidebar-menu">
+/* =========================================================
+   POS LINK
+========================================================= */
 
-            <li>
+.sidebar-menu a[href*="/pos"] {
+    background: #f4f5f7;
 
-                <a
-                    href="<?= base_url('users') ?>"
-                    class="<?= $segment === 'users' ? 'active' : '' ?>"
-                >
+    color: #111827;
 
-                    <i class="bi bi-people-fill"></i>
+    font-weight: 600;
+}
 
-                    <span>Users</span>
+.sidebar-menu a[href*="/pos"] i {
+    color: #111827;
+}
 
-                </a>
+.sidebar-menu a[href*="/pos"]:hover {
+    background: #111827;
 
-            </li>
+    color: #ffffff;
+}
 
+.sidebar-menu a[href*="/pos"]:hover i {
+    color: #ffffff;
+}
 
-            <li>
 
-                <a
-                    href="<?= base_url('roles') ?>"
-                    class="<?= $segment === 'roles' ? 'active' : '' ?>"
-                >
+/* =========================================================
+   SIDEBAR BOTTOM
+========================================================= */
 
-                    <i class="bi bi-shield-lock"></i>
+.sidebar-bottom {
+    flex-shrink: 0;
 
-                    <span>Roles</span>
+    padding: 12px 14px 18px;
 
-                </a>
+    border-top: 1px solid #eeeeee;
 
-            </li>
+    background: #ffffff;
+}
 
 
-            <li>
+/* =========================================================
+   LOGOUT
+========================================================= */
 
-                <a
-                    href="<?= base_url('reports') ?>"
-                    class="<?= $segment === 'reports' ? 'active' : '' ?>"
-                >
+.logout-button {
+    width: 100%;
+    height: 44px;
 
-                    <i class="bi bi-bar-chart"></i>
+    display: flex;
+    align-items: center;
 
-                    <span>Reports</span>
+    padding: 0 13px;
 
-                </a>
+    border-radius: 10px;
 
-            </li>
+    color: #dc3545;
 
+    text-decoration: none;
 
-            <li>
+    font-size: 13px;
 
-                <a
-                    href="<?= base_url('settings') ?>"
-                    class="<?= $segment === 'settings' ? 'active' : '' ?>"
-                >
+    font-weight: 600;
 
-                    <i class="bi bi-gear"></i>
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
 
-                    <span>Settings</span>
+.logout-button i {
+    width: 24px;
 
-                </a>
+    margin-right: 9px;
 
-            </li>
+    font-size: 17px;
 
-        </ul>
+    text-align: center;
+}
 
+.logout-button:hover {
+    background: #fff1f2;
 
-        <!-- ===================================== -->
-        <!-- LOGOUT -->
-        <!-- ===================================== -->
+    color: #b42318;
+}
 
-        <div class="sidebar-footer">
 
-            <a
-                href="<?= base_url('logout') ?>"
-                class="logout-link"
-            >
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
 
-                <i class="bi bi-box-arrow-left"></i>
+.main {
+    margin-left: 255px;
 
-                <span>Logout</span>
+    min-height: 100vh;
 
-            </a>
+    transition: margin-left .25s ease;
+}
 
-        </div>
 
+/* =========================================================
+   COLLAPSED SIDEBAR
+========================================================= */
 
-    <?php elseif ($userRole === 'Cashier'): ?>
+.sidebar.collapsed {
+    width: 78px;
+}
 
+.main.expanded {
+    margin-left: 78px;
+}
 
-        <!-- ===================================== -->
-        <!-- CASHIER -->
-        <!-- ===================================== -->
 
-        <span class="menu-title">
-            POINT OF SALE
-        </span>
+/* Hide text when collapsed */
 
-        <ul class="sidebar-menu">
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .user-info,
+.sidebar.collapsed .menu-title,
+.sidebar.collapsed .sidebar-menu span,
+.sidebar.collapsed .logout-button span {
+    display: none;
+}
 
-            <li>
 
-                <a
-                    href="<?= base_url('pos') ?>"
-                    class="<?= $segment === 'pos' ? 'active' : '' ?>"
-                >
+/* Center logo */
 
-                    <i class="bi bi-cart4"></i>
+.sidebar.collapsed .logo {
+    justify-content: center;
 
-                    <span>Point of Sale</span>
+    padding: 0;
+}
 
-                </a>
+.sidebar.collapsed .logo-icon {
+    margin-right: 0;
+}
 
-            </li>
 
-        </ul>
+/* Center user */
 
+.sidebar.collapsed .user-card {
+    justify-content: center;
 
-        <!-- ===================================== -->
-        <!-- CASHIER LOGOUT -->
-        <!-- ===================================== -->
+    padding: 8px;
 
-        <div class="sidebar-footer">
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
-            <a
-                href="<?= base_url('logout') ?>"
-                class="logout-link"
-            >
 
-                <i class="bi bi-box-arrow-left"></i>
+/* Center menu icons */
 
-                <span>Logout</span>
+.sidebar.collapsed .sidebar-menu {
+    padding-left: 9px;
+    padding-right: 9px;
+}
 
-            </a>
+.sidebar.collapsed .sidebar-menu a {
+    justify-content: center;
 
-        </div>
+    padding: 0;
+}
 
+.sidebar.collapsed .sidebar-menu a i {
+    margin-right: 0;
+}
 
-    <?php endif; ?>
 
-</aside>
+/* Center logout */
+
+.sidebar.collapsed .sidebar-bottom {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sidebar.collapsed .logout-button {
+    justify-content: center;
+
+    padding: 0;
+}
+
+.sidebar.collapsed .logout-button i {
+    margin-right: 0;
+}
+
+
+/* =========================================================
+   SIDEBAR TRANSITION
+========================================================= */
+
+.sidebar {
+    transition: width .25s ease;
+}
+
+.logo-text,
+.user-info,
+.menu-title,
+.sidebar-menu span,
+.logout-button span {
+    transition: opacity .15s ease;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .main {
+        margin-left: 230px;
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .sidebar {
+        width: 255px;
+
+        transform: translateX(-100%);
+
+        transition:
+            transform .25s ease,
+            width .25s ease;
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .sidebar.collapsed {
+        width: 255px;
+    }
+
+    .main,
+    .main.expanded {
+        margin-left: 0;
+    }
+
+}
