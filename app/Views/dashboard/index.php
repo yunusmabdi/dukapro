@@ -1,4 +1,3 @@
-```php
 <?php
 $segment = service('uri')->getSegment(1);
 ?>
@@ -633,4 +632,3 @@ $segment = service('uri')->getSegment(1);
 </body>
 
 </html>
-```

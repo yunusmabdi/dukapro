@@ -117,11 +117,11 @@ class AuthController extends BaseController
 
         // Cashier → POS
         if ($user['role'] === 'Cashier') {
-            return redirect()->to('/pos');
+            return redirect()->to(base_url('/pos'));
         }
 
         // Administrator → Dashboard
-        return redirect()->to('/dashboard');
+        return redirect()->to(base_url('/dashboard'));
     }
 
 

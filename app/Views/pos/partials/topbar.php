@@ -4,14 +4,19 @@
 
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-            <!-- Left -->
+
+            <!-- =========================================
+                 LEFT - POS BRANDING
+            ========================================== -->
+
             <div class="d-flex align-items-center gap-4">
 
                 <div class="d-flex align-items-center">
 
                     <div
                         class="bg-primary text-white rounded-3 d-flex align-items-center justify-content-center"
-                        style="width:48px;height:48px;">
+                        style="width:48px;height:48px;"
+                    >
 
                         <i class="bi bi-grid-fill fs-4"></i>
 
@@ -33,30 +38,49 @@
 
             </div>
 
-            <!-- Search -->
-            <div class="flex-grow-1" style="max-width:450px;">
+
+            <!-- =========================================
+                 SEARCH
+            ========================================== -->
+
+            <div
+                class="flex-grow-1"
+                style="max-width:450px;"
+            >
 
                 <div class="input-group">
 
                     <span class="input-group-text bg-white border-end-0">
+
                         <i class="bi bi-search"></i>
+
                     </span>
 
                     <input
                         type="text"
                         id="productSearch"
                         class="form-control border-start-0 shadow-none"
-                        placeholder="Search product, SKU or Barcode...">
+                        placeholder="Search product, SKU or Barcode..."
+                    >
 
                 </div>
 
             </div>
 
-            <!-- Right -->
+
+            <!-- =========================================
+                 RIGHT - POS ACTIONS
+            ========================================== -->
+
             <div class="d-flex align-items-center flex-wrap gap-2">
 
+
+                <!-- CUSTOMER -->
+
                 <button
-                    class="btn btn-light border position-relative cart-button">
+                    class="btn btn-light border position-relative cart-button"
+                    type="button"
+                >
 
                     <i class="bi bi-person"></i>
 
@@ -64,11 +88,20 @@
 
                 </button>
 
+
+                <!-- NEW CUSTOMER -->
+
                 <button
                     class="btn btn-primary d-flex align-items-center"
-                    style="background:#2563EB !important; color:#fff !important; border-color:#2563EB !important;">
+                    type="button"
+                    style="
+                        background:#2563EB !important;
+                        color:#fff !important;
+                        border-color:#2563EB !important;
+                    "
+                >
 
-                    <i class="bi bi-person-plus"></i>
+                    <i class="bi bi-person-plus me-1"></i>
 
                     <span style="color:#fff !important;">
                         New
@@ -76,14 +109,23 @@
 
                 </button>
 
-                <button class="btn btn-dark position-relative"
-                        id="cartButton">
+
+                <!-- CART -->
+
+                <button
+                    class="btn btn-dark position-relative"
+                    id="cartButton"
+                    type="button"
+                >
 
                     <i class="bi bi-cart3"></i>
+
                     Cart
 
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                        id="cartCount">
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        id="cartCount"
+                    >
 
                         <?= count(session()->get('cart') ?? []) ?>
 
@@ -91,11 +133,17 @@
 
                 </button>
 
+
+                <!-- =====================================
+                     LOGGED-IN USER
+                ====================================== -->
+
                 <div class="d-flex align-items-center">
 
                     <div
                         class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                        style="width:42px;height:42px;">
+                        style="width:42px;height:42px;"
+                    >
 
                         <i class="bi bi-person-fill"></i>
 
@@ -104,26 +152,62 @@
                     <div class="ms-2">
 
                         <div class="fw-semibold">
-                            Administrator
+
+                            <?= session('user_name') ?? 'User' ?>
+
                         </div>
 
                         <small class="text-muted">
-                            Cashier
+
+                            <?= session('user_role') ?? 'Cashier' ?>
+
                         </small>
 
                     </div>
 
                 </div>
 
-                <a
-                    href="<?= base_url() ?>"
-                    class="btn btn-outline-secondary d-flex align-items-center">
 
-                    <i class="bi bi-x-circle"></i>
+                <!-- =====================================
+                     CASHIER LOGOUT / ADMIN EXIT
+                ====================================== -->
 
-                    <span>Exit POS</span>
+                <?php if (session('user_role') === 'Cashier'): ?>
 
-                </a>
+                    <!-- CASHIER LOGOUT -->
+
+                    <a
+                        href="<?= base_url('logout') ?>"
+                        class="btn btn-outline-danger d-flex align-items-center"
+                    >
+
+                        <i class="bi bi-box-arrow-right me-1"></i>
+
+                        <span>
+                            Logout
+                        </span>
+
+                    </a>
+
+                <?php else: ?>
+
+                    <!-- ADMIN EXIT POS -->
+
+                    <a
+                        href="<?= base_url('dashboard') ?>"
+                        class="btn btn-outline-secondary d-flex align-items-center"
+                    >
+
+                        <i class="bi bi-x-circle me-1"></i>
+
+                        <span>
+                            Exit POS
+                        </span>
+
+                    </a>
+
+                <?php endif; ?>
+
 
             </div>
 
