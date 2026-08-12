@@ -1,528 +1,188 @@
-/* =========================================================
-   NEXUSERP SIDEBAR
-========================================================= */
+<?php
+$segment = service('uri')->getSegment(1);
+?>
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
+<aside class="sidebar" id="sidebar">
 
-    width: 255px;
-    height: 100vh;
+    <!-- LOGO -->
+    <div class="logo">
 
-    display: flex;
-    flex-direction: column;
+        <div class="logo-icon">
+            <i class="bi bi-grid-fill"></i>
+        </div>
 
-    background: #ffffff;
-    border-right: 1px solid #e9ecef;
+        <div>
+            <h3>NexusERP</h3>
+            <small>Enterprise Suite</small>
+        </div>
 
-    z-index: 1000;
+    </div>
 
-    overflow: hidden;
-}
 
+    <!-- USER -->
+    <div class="user-card">
 
-/* =========================================================
-   SIDEBAR TOP
-========================================================= */
+        <img
+            src="https://i.pravatar.cc/80"
+            alt="User"
+        >
 
-.sidebar-top {
-    flex: 1;
+        <div>
 
-    min-height: 0;
+            <h4>
+                <?= session('user_name') ?? 'Administrator' ?>
+            </h4>
 
-    overflow-y: auto;
+            <p>
+                <span class="status"></span>
+                <?= session('user_role') ?? 'Administrator' ?>
+            </p>
 
-    padding-bottom: 10px;
-}
+        </div>
 
-.sidebar-top::-webkit-scrollbar {
-    width: 4px;
-}
+    </div>
 
-.sidebar-top::-webkit-scrollbar-thumb {
-    background: #e5e7eb;
-    border-radius: 10px;
-}
 
+    <!-- MAIN -->
+    <span class="menu-title">MAIN</span>
 
-/* =========================================================
-   LOGO
-========================================================= */
+    <ul class="sidebar-menu">
 
-.logo {
-    height: 76px;
+        <li>
+            <a
+                href="<?= base_url('dashboard') ?>"
+                class="<?= $segment === 'dashboard' ? 'active' : '' ?>"
+            >
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
 
-    display: flex;
-    align-items: center;
+    </ul>
 
-    padding: 0 22px;
 
-    border-bottom: 1px solid #f0f1f3;
-}
+    <!-- INVENTORY -->
+    <span class="menu-title">INVENTORY</span>
 
-.logo-icon {
-    width: 40px;
-    height: 40px;
+    <ul class="sidebar-menu">
 
-    min-width: 40px;
+        <li>
+            <a href="<?= base_url('products') ?>">
+                <i class="bi bi-box"></i>
+                <span>Products</span>
+            </a>
+        </li>
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        <li>
+            <a href="<?= base_url('categories') ?>">
+                <i class="bi bi-tags"></i>
+                <span>Categories</span>
+            </a>
+        </li>
 
-    border-radius: 11px;
+        <li>
+            <a href="<?= base_url('suppliers') ?>">
+                <i class="bi bi-truck"></i>
+                <span>Suppliers</span>
+            </a>
+        </li>
 
-    background: #111827;
-    color: #ffffff;
+        <li>
+            <a href="<?= base_url('inventory') ?>">
+                <i class="bi bi-boxes"></i>
+                <span>Inventory</span>
+            </a>
+        </li>
 
-    font-size: 18px;
+        <li>
+            <a href="<?= base_url('purchases') ?>">
+                <i class="bi bi-cart-check"></i>
+                <span>Purchases</span>
+            </a>
+        </li>
 
-    margin-right: 11px;
-}
+    </ul>
 
-.logo-text h3 {
-    margin: 0;
 
-    font-size: 18px;
-    font-weight: 800;
+    <!-- SALES -->
+    <span class="menu-title">SALES</span>
 
-    color: #111827;
+    <ul class="sidebar-menu">
 
-    line-height: 1.1;
-}
+        <li>
+            <a href="<?= base_url('customers') ?>">
+                <i class="bi bi-people"></i>
+                <span>Customers</span>
+            </a>
+        </li>
 
-.logo-text small {
-    display: block;
+        <li>
+            <a href="<?= base_url('invoices') ?>">
+                <i class="bi bi-receipt"></i>
+                <span>Invoices</span>
+            </a>
+        </li>
 
-    margin-top: 3px;
+    </ul>
 
-    color: #9ca3af;
 
-    font-size: 10px;
+    <!-- POINT OF SALE -->
+    <span class="menu-title">POINT OF SALE</span>
 
-    letter-spacing: .4px;
-}
+    <ul class="sidebar-menu">
 
+        <li>
+            <a href="<?= base_url('pos') ?>">
+                <i class="bi bi-cart4"></i>
+                <span>Launch POS</span>
+            </a>
+        </li>
 
-/* =========================================================
-   USER CARD
-========================================================= */
+    </ul>
 
-.user-card {
-    display: flex;
-    align-items: center;
 
-    margin: 15px 14px;
+    <!-- SYSTEM -->
+    <span class="menu-title">SYSTEM</span>
 
-    padding: 11px;
+    <ul class="sidebar-menu">
 
-    border-radius: 12px;
+        <li>
+            <a href="<?= base_url('users') ?>">
+                <i class="bi bi-people-fill"></i>
+                <span>Users</span>
+            </a>
+        </li>
 
-    background: #f8f9fb;
-}
+        <li>
+            <a href="<?= base_url('roles') ?>">
+                <i class="bi bi-shield-lock"></i>
+                <span>Roles</span>
+            </a>
+        </li>
 
-.user-card img {
-    width: 38px;
-    height: 38px;
+        <li>
+            <a href="<?= base_url('reports') ?>">
+                <i class="bi bi-bar-chart"></i>
+                <span>Reports</span>
+            </a>
+        </li>
 
-    min-width: 38px;
+        <li>
+            <a href="<?= base_url('settings') ?>">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </li>
 
-    object-fit: cover;
+    </ul>
+    <!-- LOGOUT -->
+    <div class="sidebar-logout">
 
-    border-radius: 50%;
-}
+        <a href="<?= base_url('logout') ?>">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+        </a>
 
-.user-info {
-    min-width: 0;
+    </div>
 
-    margin-left: 10px;
-}
-
-.user-info h4 {
-    display: block;
-
-    margin: 0;
-
-    color: #1f2937;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.user-info p {
-    display: flex;
-    align-items: center;
-
-    gap: 5px;
-
-    margin: 3px 0 0;
-
-    color: #9ca3af;
-
-    font-size: 11px;
-}
-
-.status {
-    width: 7px;
-    height: 7px;
-
-    display: inline-block;
-
-    background: #22c55e;
-
-    border-radius: 50%;
-}
-
-
-/* =========================================================
-   SECTION TITLES
-========================================================= */
-
-.menu-title {
-    display: block;
-
-    padding: 14px 23px 7px;
-
-    color: #a0a6af;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   MENU
-========================================================= */
-
-.sidebar-menu {
-    list-style: none;
-
-    padding: 0 12px;
-
-    margin: 0;
-}
-
-.sidebar-menu li {
-    margin-bottom: 3px;
-}
-
-.sidebar-menu a {
-    height: 42px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 12px;
-
-    border-radius: 9px;
-
-    color: #68707d;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 500;
-
-    transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-.sidebar-menu a i {
-    width: 23px;
-
-    margin-right: 9px;
-
-    font-size: 16px;
-
-    text-align: center;
-}
-
-.sidebar-menu a:hover {
-    background: #f4f5f7;
-
-    color: #111827;
-
-    transform: translateX(2px);
-}
-
-
-/* =========================================================
-   ACTIVE MENU
-========================================================= */
-
-.sidebar-menu a.active {
-    background: #111827;
-
-    color: #ffffff;
-
-    font-weight: 600;
-}
-
-.sidebar-menu a.active:hover {
-    background: #111827;
-
-    color: #ffffff;
-
-    transform: none;
-}
-
-
-/* =========================================================
-   POS LINK
-========================================================= */
-
-.sidebar-menu a[href*="/pos"] {
-    background: #f4f5f7;
-
-    color: #111827;
-
-    font-weight: 600;
-}
-
-.sidebar-menu a[href*="/pos"] i {
-    color: #111827;
-}
-
-.sidebar-menu a[href*="/pos"]:hover {
-    background: #111827;
-
-    color: #ffffff;
-}
-
-.sidebar-menu a[href*="/pos"]:hover i {
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   SIDEBAR BOTTOM
-========================================================= */
-
-.sidebar-bottom {
-    flex-shrink: 0;
-
-    padding: 12px 14px 18px;
-
-    border-top: 1px solid #eeeeee;
-
-    background: #ffffff;
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-.logout-button {
-    width: 100%;
-    height: 44px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 13px;
-
-    border-radius: 10px;
-
-    color: #dc3545;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    transition:
-        background .2s ease,
-        color .2s ease;
-}
-
-.logout-button i {
-    width: 24px;
-
-    margin-right: 9px;
-
-    font-size: 17px;
-
-    text-align: center;
-}
-
-.logout-button:hover {
-    background: #fff1f2;
-
-    color: #b42318;
-}
-
-
-/* =========================================================
-   MAIN CONTENT
-========================================================= */
-
-.main {
-    margin-left: 255px;
-
-    min-height: 100vh;
-
-    transition: margin-left .25s ease;
-}
-
-
-/* =========================================================
-   COLLAPSED SIDEBAR
-========================================================= */
-
-.sidebar.collapsed {
-    width: 78px;
-}
-
-.main.expanded {
-    margin-left: 78px;
-}
-
-
-/* Hide text when collapsed */
-
-.sidebar.collapsed .logo-text,
-.sidebar.collapsed .user-info,
-.sidebar.collapsed .menu-title,
-.sidebar.collapsed .sidebar-menu span,
-.sidebar.collapsed .logout-button span {
-    display: none;
-}
-
-
-/* Center logo */
-
-.sidebar.collapsed .logo {
-    justify-content: center;
-
-    padding: 0;
-}
-
-.sidebar.collapsed .logo-icon {
-    margin-right: 0;
-}
-
-
-/* Center user */
-
-.sidebar.collapsed .user-card {
-    justify-content: center;
-
-    padding: 8px;
-
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-
-/* Center menu icons */
-
-.sidebar.collapsed .sidebar-menu {
-    padding-left: 9px;
-    padding-right: 9px;
-}
-
-.sidebar.collapsed .sidebar-menu a {
-    justify-content: center;
-
-    padding: 0;
-}
-
-.sidebar.collapsed .sidebar-menu a i {
-    margin-right: 0;
-}
-
-
-/* Center logout */
-
-.sidebar.collapsed .sidebar-bottom {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.sidebar.collapsed .logout-button {
-    justify-content: center;
-
-    padding: 0;
-}
-
-.sidebar.collapsed .logout-button i {
-    margin-right: 0;
-}
-
-
-/* =========================================================
-   SIDEBAR TRANSITION
-========================================================= */
-
-.sidebar {
-    transition: width .25s ease;
-}
-
-.logo-text,
-.user-info,
-.menu-title,
-.sidebar-menu span,
-.logout-button span {
-    transition: opacity .15s ease;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 991px) {
-
-    .sidebar {
-        width: 230px;
-    }
-
-    .main {
-        margin-left: 230px;
-    }
-
-}
-
-
-@media (max-width: 767px) {
-
-    .sidebar {
-        width: 255px;
-
-        transform: translateX(-100%);
-
-        transition:
-            transform .25s ease,
-            width .25s ease;
-    }
-
-    .sidebar.mobile-open {
-        transform: translateX(0);
-    }
-
-    .sidebar.collapsed {
-        width: 255px;
-    }
-
-    .main,
-    .main.expanded {
-        margin-left: 0;
-    }
-
-}
+</aside>

@@ -1,662 +1,282 @@
-/* =========================================================
-   NEXUSERP SIDEBAR
-========================================================= */
+/* =========================================
+   SIDEBAR
+========================================= */
 
-.nexus-sidebar {
-    width: 255px;
-    height: 100vh;
-
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
 
-    display: flex;
-    flex-direction: column;
+    width: 270px;
+    height: 100vh;
 
-    background: #ffffff;
+    background: #0f172a;
+    color: #fff;
 
-    border-right: 1px solid #e9ecef;
-
-    z-index: 1000;
-
-    overflow: hidden;
-
-    transition:
-        width 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-/* =========================================================
-   BRAND
-========================================================= */
-
-.nexus-brand {
-    height: 76px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 22px;
-
-    border-bottom: 1px solid #f0f1f3;
-
-    overflow: hidden;
-}
-
-.nexus-brand-icon {
-    width: 40px;
-    height: 40px;
-
-    min-width: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 11px;
-
-    background: #111827;
-    color: #ffffff;
-
-    font-size: 18px;
-
-    margin-right: 11px;
-}
-
-.nexus-brand-name {
-    font-size: 18px;
-    font-weight: 800;
-
-    color: #111827;
-
-    line-height: 1.1;
-
-    white-space: nowrap;
-}
-
-.nexus-brand-subtitle {
-    font-size: 10px;
-
-    color: #9ca3af;
-
-    margin-top: 3px;
-
-    letter-spacing: 0.4px;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   USER
-========================================================= */
-
-.nexus-user {
-    display: flex;
-    align-items: center;
-
-    margin: 15px 14px;
-
-    padding: 11px;
-
-    border-radius: 12px;
-
-    background: #f8f9fb;
-
-    overflow: hidden;
-
-    transition: all 0.25s ease;
-}
-
-.nexus-avatar {
-    width: 38px;
-    height: 38px;
-
-    min-width: 38px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #111827;
-
-    color: #ffffff;
-
-    font-size: 17px;
-}
-
-.nexus-user-info {
-    margin-left: 10px;
-
-    min-width: 0;
-
-    transition: opacity 0.2s ease;
-}
-
-.nexus-user-info strong {
-    display: block;
-
-    color: #1f2937;
-
-    font-size: 13px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.nexus-user-info span {
-    display: flex;
-    align-items: center;
-
-    gap: 5px;
-
-    margin-top: 3px;
-
-    color: #9ca3af;
-
-    font-size: 11px;
-
-    white-space: nowrap;
-}
-
-.nexus-user-info span i {
-    font-size: 7px;
-
-    color: #22c55e;
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.nexus-navigation {
-    flex: 1;
-
-    padding: 0 12px 15px;
+    padding: 24px 18px;
 
     overflow-y: auto;
 
-    overflow-x: hidden;
+    transition: transform .3s ease;
+
+    z-index: 1000;
 }
 
 
-/* Scrollbar */
+/* =========================================
+   HIDDEN SIDEBAR
+========================================= */
 
-.nexus-navigation::-webkit-scrollbar {
-    width: 4px;
-}
-
-.nexus-navigation::-webkit-scrollbar-thumb {
-    background: #e5e7eb;
-
-    border-radius: 10px;
-}
-
-.nexus-navigation::-webkit-scrollbar-track {
-    background: transparent;
+.sidebar.hidden {
+    transform: translateX(-100%);
 }
 
 
-/* =========================================================
-   SECTION TITLES
-========================================================= */
+/* =========================================
+   LOGO
+========================================= */
 
-.nexus-section-title {
-    padding: 14px 11px 7px;
-
-    color: #a0a6af;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-    white-space: nowrap;
-
-    transition: opacity 0.2s ease;
-}
-
-
-/* =========================================================
-   MENU ITEMS
-========================================================= */
-
-.nexus-menu-item {
-    height: 42px;
-
+.logo {
     display: flex;
     align-items: center;
 
-    padding: 0 12px;
+    gap: 14px;
 
-    margin-bottom: 3px;
-
-    border-radius: 9px;
-
-    color: #68707d;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 500;
-
-    white-space: nowrap;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+    padding: 4px 4px 28px;
 }
 
-.nexus-menu-item i {
-    width: 23px;
+.logo-icon {
+    width: 48px;
+    height: 48px;
 
-    min-width: 23px;
+    min-width: 48px;
 
-    font-size: 16px;
+    border-radius: 14px;
 
-    margin-right: 9px;
+    background: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+.logo h3 {
+    font-size: 22px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.logo small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   USER CARD
+========================================= */
+
+.user-card {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    background: #1e293b;
+
+    border-radius: 18px;
+
+    margin-bottom: 28px;
+
+    overflow: hidden;
+}
+
+.user-card img {
+    width: 48px;
+    height: 48px;
+
+    min-width: 48px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.user-card h4 {
+    font-size: 15px;
+    margin-bottom: 4px;
+
+    white-space: nowrap;
+}
+
+.user-card p {
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+.status {
+    display: inline-block;
+
+    width: 8px;
+    height: 8px;
+
+    background: #22c55e;
+
+    border-radius: 50%;
+
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   MENU TITLES
+========================================= */
+
+.menu-title {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    margin: 24px 12px 10px;
+}
+
+
+/* =========================================
+   MENU
+========================================= */
+
+.sidebar-menu {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 4px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    transition: all .2s ease;
+
+    white-space: nowrap;
+}
+
+.sidebar-menu a i {
+    width: 22px;
+    min-width: 22px;
+
+    font-size: 18px;
 
     text-align: center;
 }
 
-.nexus-menu-item:hover {
-    background: #f4f5f7;
+.sidebar-menu a:hover {
+    background: #1e293b;
 
-    color: #111827;
+    color: #fff;
+}
 
-    transform: translateX(2px);
+.sidebar-menu a.active {
+    background: #2563eb;
+
+    color: #fff;
+
+    box-shadow: 0 6px 18px rgba(37, 99, 235, .25);
 }
 
 
-/* =========================================================
-   ACTIVE
-========================================================= */
-
-.nexus-menu-item.active {
-    background: #111827;
-
-    color: #ffffff;
-
-    font-weight: 600;
-}
-
-.nexus-menu-item.active:hover {
-    background: #111827;
-
-    color: #ffffff;
-
-    transform: none;
-}
-
-
-/* =========================================================
-   POS
-========================================================= */
-
-.nexus-pos-link {
-    background: #f4f5f7;
-
-    color: #111827;
-
-    font-weight: 600;
-}
-
-.nexus-pos-link i {
-    color: #111827;
-}
-
-.nexus-pos-link:hover {
-    background: #111827;
-
-    color: #ffffff;
-}
-
-.nexus-pos-link:hover i {
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   SIDEBAR BOTTOM
-========================================================= */
-
-.nexus-sidebar-bottom {
-    flex-shrink: 0;
-
-    padding: 12px 14px 18px;
-
-    border-top: 1px solid #eeeeee;
-
-    background: #ffffff;
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-.nexus-logout {
-    width: 100%;
-    height: 44px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 13px;
-
-    border-radius: 10px;
-
-    color: #dc3545;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    white-space: nowrap;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.nexus-logout i {
-    width: 24px;
-
-    min-width: 24px;
-
-    margin-right: 9px;
-
-    font-size: 17px;
-
-    text-align: center;
-}
-
-.nexus-logout:hover {
-    background: #fff1f2;
-
-    color: #b42318;
-}
-
-
-/* =========================================================
-   COLLAPSED SIDEBAR
-========================================================= */
-
-.nexus-sidebar.collapsed {
-    width: 78px;
-}
-
-
-/* Brand */
-
-.nexus-sidebar.collapsed .nexus-brand {
-    justify-content: center;
-
-    padding: 0;
-}
-
-.nexus-sidebar.collapsed .nexus-brand-icon {
-    margin-right: 0;
-}
-
-.nexus-sidebar.collapsed .nexus-brand > div:last-child {
-    display: none;
-}
-
-
-/* User */
-
-.nexus-sidebar.collapsed .nexus-user {
-    justify-content: center;
-
-    margin: 15px 10px;
-
-    padding: 10px;
-}
-
-.nexus-sidebar.collapsed .nexus-user-info {
-    display: none;
-}
-
-
-/* Navigation */
-
-.nexus-sidebar.collapsed .nexus-section-title {
-    display: none;
-}
-
-
-/* Menu */
-
-.nexus-sidebar.collapsed .nexus-navigation {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.nexus-sidebar.collapsed .nexus-menu-item {
-    justify-content: center;
-
-    padding: 0;
-
-    width: 58px;
-
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.nexus-sidebar.collapsed .nexus-menu-item i {
-    margin-right: 0;
-}
-
-.nexus-sidebar.collapsed .nexus-menu-item span {
-    display: none;
-}
-
-
-/* Logout */
-
-.nexus-sidebar.collapsed .nexus-sidebar-bottom {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.nexus-sidebar.collapsed .nexus-logout {
-    justify-content: center;
-
-    padding: 0;
-
-    width: 58px;
-
-    margin: 0 auto;
-}
-
-.nexus-sidebar.collapsed .nexus-logout i {
-    margin-right: 0;
-}
-
-.nexus-sidebar.collapsed .nexus-logout span {
-    display: none;
-}
-
-
-/* =========================================================
-   MAIN CONTENT
-========================================================= */
-
-.nexus-main {
-    margin-left: 255px;
-
-    min-height: 100vh;
-
-    transition: margin-left 0.25s ease;
-}
-
-.nexus-sidebar.collapsed ~ .nexus-main {
-    margin-left: 78px;
-}
-
-
-/* =========================================================
-   SIDEBAR TOGGLE
-========================================================= */
-
-.nexus-sidebar-toggle {
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 9px;
-
-    background: #ffffff;
-
-    color: #374151;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.nexus-sidebar-toggle:hover {
-    background: #111827;
-
-    border-color: #111827;
-
-    color: #ffffff;
-}
-
-
-/* =========================================================
+/* =========================================
    MOBILE
-========================================================= */
+========================================= */
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
 
-    .nexus-sidebar {
-        width: 230px;
-    }
-
-    .nexus-main {
-        margin-left: 230px;
-    }
-
-    .nexus-sidebar.collapsed {
-        width: 78px;
-    }
-
-    .nexus-sidebar.collapsed ~ .nexus-main {
-        margin-left: 78px;
-    }
-}
-
-
-@media (max-width: 767px) {
-
-    .nexus-sidebar {
-        width: 255px;
-
+    .sidebar {
         transform: translateX(-100%);
-
-        transition:
-            transform 0.25s ease;
     }
 
-    .nexus-sidebar.show {
+    .sidebar.mobile-open {
         transform: translateX(0);
     }
 
-    .nexus-sidebar.collapsed {
-        width: 255px;
-    }
+}
+/* =========================================
+   LOGOUT
+========================================= */
 
-    .nexus-sidebar.collapsed .nexus-brand {
-        justify-content: flex-start;
+.sidebar-logout {
+    margin-top: 30px;
 
-        padding: 0 22px;
-    }
+    padding-top: 18px;
 
-    .nexus-sidebar.collapsed .nexus-brand > div:last-child {
-        display: block;
-    }
+    border-top: 1px solid #1e293b;
+}
 
-    .nexus-sidebar.collapsed .nexus-brand-icon {
-        margin-right: 11px;
-    }
+.sidebar-logout a {
+    display: flex;
+    align-items: center;
 
-    .nexus-sidebar.collapsed .nexus-user {
-        justify-content: flex-start;
+    gap: 14px;
 
-        margin: 15px 14px;
+    padding: 12px 14px;
 
-        padding: 11px;
-    }
+    border-radius: 12px;
 
-    .nexus-sidebar.collapsed .nexus-user-info {
-        display: block;
-    }
+    color: #cbd5e1;
 
-    .nexus-sidebar.collapsed .nexus-section-title {
-        display: block;
-    }
+    font-size: 14px;
 
-    .nexus-sidebar.collapsed .nexus-menu-item {
-        justify-content: flex-start;
+    transition: all .2s ease;
 
-        width: auto;
+    white-space: nowrap;
+}
 
-        padding: 0 12px;
+.sidebar-logout a i {
+    width: 22px;
+    min-width: 22px;
 
-        margin-left: 0;
-        margin-right: 0;
-    }
+    font-size: 18px;
 
-    .nexus-sidebar.collapsed .nexus-menu-item i {
-        margin-right: 9px;
-    }
+    text-align: center;
+}
 
-    .nexus-sidebar.collapsed .nexus-menu-item span {
-        display: inline;
-    }
+.sidebar-logout a:hover {
+    background: #7f1d1d;
 
-    .nexus-sidebar.collapsed .nexus-logout {
-        justify-content: flex-start;
-
-        width: 100%;
-
-        padding: 0 13px;
-    }
-
-    .nexus-sidebar.collapsed .nexus-logout i {
-        margin-right: 9px;
-    }
-
-    .nexus-sidebar.collapsed .nexus-logout span {
-        display: inline;
-    }
-
-    .nexus-main,
-    .nexus-sidebar.collapsed ~ .nexus-main {
-        margin-left: 0;
-    }
+    color: #fff;
 }
