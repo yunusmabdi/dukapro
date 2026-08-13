@@ -26,6 +26,7 @@ class SaleModel extends Model
         'discount',
         'tax',
         'total',
+        'payment_reference',
         'payment_method',
         'amount_paid',
         'change_amount',
