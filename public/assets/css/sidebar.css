@@ -221,21 +221,6 @@
 
 
 /* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 768px) {
-
-    .sidebar {
-        transform: translateX(-100%);
-    }
-
-    .sidebar.mobile-open {
-        transform: translateX(0);
-    }
-
-}
-/* =========================================
    LOGOUT
 ========================================= */
 
@@ -279,4 +264,73 @@
     background: #7f1d1d;
 
     color: #fff;
+}
+
+
+/* =========================================
+   SIDEBAR TOGGLE BUTTON
+========================================= */
+
+.sidebar-toggle {
+    position: fixed;
+
+    top: 18px;
+    left: 285px;
+
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #334155;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 4px 14px rgba(15, 23, 42, .10);
+
+    cursor: pointer;
+
+    transition:
+        left .3s ease,
+        transform .2s ease;
+
+    z-index: 1100;
+}
+
+.sidebar-toggle:hover {
+    background: #f8fafc;
+}
+
+body.sidebar-collapsed .sidebar-toggle {
+    left: 18px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        left: 18px;
+    }
+
+    body.sidebar-collapsed .sidebar-toggle {
+        left: 18px;
+    }
+
 }

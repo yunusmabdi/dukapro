@@ -3,6 +3,15 @@ $segment = service('uri')->getSegment(1);
 ?>
 
 <aside class="sidebar" id="sidebar">
+    <button
+        type="button"
+        class="sidebar-toggle"
+        id="sidebarToggle"
+        aria-label="Toggle sidebar"
+        title="Toggle sidebar"
+    >
+        <i class="bi bi-layout-sidebar-inset"></i>
+    </button>
 
     <!-- LOGO -->
     <div class="logo">

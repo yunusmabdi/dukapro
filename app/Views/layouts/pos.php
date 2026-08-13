@@ -27,7 +27,7 @@
     <!-- POS Styles -->
     <link
         rel="stylesheet"
-        href="<?= base_url('assets/css/pos.css') ?>">
+        href="<?= base_url('assets/css/pos.css') ?>?v=<?= time() ?>">
 
 </head>
 <body>

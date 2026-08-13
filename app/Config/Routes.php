@@ -183,3 +183,11 @@ $routes->post('checkout', 'CheckoutController::checkout');
 $routes->post('checkout/draft', 'CheckoutController::draft');
 
 $routes->get('checkout/resume/(:num)', 'CheckoutController::resume/$1');
+
+
+/*
+|--------------------------------------------------------------------------
+| Sales History
+|--------------------------------------------------------------------------
+*/
+$routes->get('sales', 'SalesHistoryController::index');

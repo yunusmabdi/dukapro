@@ -1,0 +1,96 @@
+/* =========================================
+   TOPBAR
+========================================= */
+
+.topbar {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    left: 270px;
+
+    height: 64px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 24px;
+
+    z-index: 900;
+
+    transition: left 0.3s ease;
+}
+
+
+/* =========================================
+   SIDEBAR TOGGLE
+========================================= */
+
+#toggleSidebar {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    color: #334155;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    transition: all 0.2s ease;
+}
+
+#toggleSidebar:hover {
+    background: #2563eb;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   USER INFO
+========================================= */
+
+.user-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.user-info i {
+    font-size: 25px;
+}
+
+
+/* =========================================
+   SIDEBAR HIDDEN
+========================================= */
+
+.sidebar-hidden .topbar {
+    left: 0;
+}

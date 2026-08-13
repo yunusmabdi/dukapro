@@ -1,4 +1,4 @@
-<div class="card border-0 shadow-sm rounded-4 mb-4">
+<div class="card border-0 shadow-sm rounded-4 mb-4 pos-topbar">
 
     <div class="card-body">
 
@@ -17,9 +17,7 @@
                         class="bg-primary text-white rounded-3 d-flex align-items-center justify-content-center"
                         style="width:48px;height:48px;"
                     >
-
                         <i class="bi bi-grid-fill fs-4"></i>
-
                     </div>
 
                     <div class="ms-3">
@@ -51,9 +49,7 @@
                 <div class="input-group">
 
                     <span class="input-group-text bg-white border-end-0">
-
                         <i class="bi bi-search"></i>
-
                     </span>
 
                     <input
@@ -84,7 +80,9 @@
 
                     <i class="bi bi-person"></i>
 
-                    <span>Customer</span>
+                    <span>
+                        Customer
+                    </span>
 
                 </button>
 
@@ -126,17 +124,23 @@
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                         id="cartCount"
                     >
-
                         <?= count(session()->get('cart') ?? []) ?>
-
                     </span>
 
                 </button>
 
 
                 <!-- =====================================
-                     LOGGED-IN USER DROPDOWN
+                     USER DROPDOWN
                 ====================================== -->
+
+                <?php
+                    $userName = session('user_name') ?? 'User';
+                    $userRole = session('user_role') ?? 'Cashier';
+
+                    $isCashier = ($userRole === 'Cashier');
+                    $isAdmin   = ($userRole === 'Administrator');
+                ?>
 
                 <div class="dropdown">
 
@@ -154,9 +158,7 @@
                             class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
                             style="width:42px;height:42px;"
                         >
-
                             <i class="bi bi-person-fill"></i>
-
                         </div>
 
 
@@ -165,15 +167,11 @@
                         <div class="ms-2 text-start">
 
                             <div class="fw-semibold">
-
-                                <?= esc(session('user_name') ?? 'User') ?>
-
+                                <?= esc($userName) ?>
                             </div>
 
                             <small class="text-muted">
-
-                                <?= esc(session('user_role') ?? 'Cashier') ?>
-
+                                <?= esc($userRole) ?>
                             </small>
 
                         </div>
@@ -186,30 +184,28 @@
                     </button>
 
 
-                    <!-- Dropdown Menu -->
+                    <!-- =================================
+                         DROPDOWN
+                    ================================== -->
 
                     <ul
                         class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2"
                         aria-labelledby="userDropdown"
-                        style="min-width:210px;"
+                        style="min-width:220px;"
                     >
 
-                        <!-- User Header -->
+                        <!-- USER HEADER -->
 
                         <li>
 
                             <div class="px-3 py-2">
 
                                 <div class="fw-semibold">
-
-                                    <?= esc(session('user_name') ?? 'User') ?>
-
+                                    <?= esc($userName) ?>
                                 </div>
 
                                 <small class="text-muted">
-
-                                    <?= esc(session('user_role') ?? 'Cashier') ?>
-
+                                    <?= esc($userRole) ?>
                                 </small>
 
                             </div>
@@ -222,13 +218,16 @@
                         </li>
 
 
-                        <!-- SALE HISTORY -->
+                        <!-- =================================
+                             SALE HISTORY
+                             AVAILABLE TO BOTH
+                        ================================== -->
 
                         <li>
 
                             <a
                                 class="dropdown-item d-flex align-items-center gap-2 py-2"
-                                href="<?= base_url('invoices') ?>"
+                                href="<?= base_url('sales') ?>"
                             >
 
                                 <i class="bi bi-receipt text-primary"></i>
@@ -242,9 +241,15 @@
                         </li>
 
 
-                        <?php if (session('user_role') === 'Cashier'): ?>
+                        <!-- =================================
+                             CASHIER OPTIONS
+                        ================================== -->
 
-                            <!-- LOGOUT -->
+                        <?php if ($isCashier): ?>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
 
                             <li>
 
@@ -263,9 +268,12 @@
 
                             </li>
 
-                        <?php else: ?>
 
-                            <!-- EXIT POS -->
+                        <!-- =================================
+                             ADMIN OPTIONS
+                        ================================== -->
+
+                        <?php elseif ($isAdmin): ?>
 
                             <li>
 
@@ -284,12 +292,30 @@
 
                             </li>
 
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item d-flex align-items-center gap-2 py-2 text-danger"
+                                    href="<?= base_url('logout') ?>"
+                                >
+
+                                    <i class="bi bi-box-arrow-right"></i>
+
+                                    <span>
+                                        Logout
+                                    </span>
+
+                                </a>
+
+                            </li>
+
                         <?php endif; ?>
+
 
                     </ul>
 
                 </div>
-
 
             </div>
 
