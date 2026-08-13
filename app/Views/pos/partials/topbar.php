@@ -135,78 +135,160 @@
 
 
                 <!-- =====================================
-                     LOGGED-IN USER
+                     LOGGED-IN USER DROPDOWN
                 ====================================== -->
 
-                <div class="d-flex align-items-center">
+                <div class="dropdown">
 
-                    <div
-                        class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                        style="width:42px;height:42px;"
+                    <button
+                        class="btn btn-light border-0 d-flex align-items-center p-1 pe-2"
+                        type="button"
+                        id="userDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
                     >
 
-                        <i class="bi bi-person-fill"></i>
+                        <!-- Avatar -->
 
-                    </div>
+                        <div
+                            class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                            style="width:42px;height:42px;"
+                        >
 
-                    <div class="ms-2">
-
-                        <div class="fw-semibold">
-
-                            <?= session('user_name') ?? 'User' ?>
+                            <i class="bi bi-person-fill"></i>
 
                         </div>
 
-                        <small class="text-muted">
 
-                            <?= session('user_role') ?? 'Cashier' ?>
+                        <!-- User Details -->
 
-                        </small>
+                        <div class="ms-2 text-start">
 
-                    </div>
+                            <div class="fw-semibold">
+
+                                <?= esc(session('user_name') ?? 'User') ?>
+
+                            </div>
+
+                            <small class="text-muted">
+
+                                <?= esc(session('user_role') ?? 'Cashier') ?>
+
+                            </small>
+
+                        </div>
+
+
+                        <!-- Arrow -->
+
+                        <i class="bi bi-chevron-down ms-3 text-muted"></i>
+
+                    </button>
+
+
+                    <!-- Dropdown Menu -->
+
+                    <ul
+                        class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2"
+                        aria-labelledby="userDropdown"
+                        style="min-width:210px;"
+                    >
+
+                        <!-- User Header -->
+
+                        <li>
+
+                            <div class="px-3 py-2">
+
+                                <div class="fw-semibold">
+
+                                    <?= esc(session('user_name') ?? 'User') ?>
+
+                                </div>
+
+                                <small class="text-muted">
+
+                                    <?= esc(session('user_role') ?? 'Cashier') ?>
+
+                                </small>
+
+                            </div>
+
+                        </li>
+
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+
+                        <!-- SALE HISTORY -->
+
+                        <li>
+
+                            <a
+                                class="dropdown-item d-flex align-items-center gap-2 py-2"
+                                href="<?= base_url('invoices') ?>"
+                            >
+
+                                <i class="bi bi-receipt text-primary"></i>
+
+                                <span>
+                                    Sale History
+                                </span>
+
+                            </a>
+
+                        </li>
+
+
+                        <?php if (session('user_role') === 'Cashier'): ?>
+
+                            <!-- LOGOUT -->
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item d-flex align-items-center gap-2 py-2 text-danger"
+                                    href="<?= base_url('logout') ?>"
+                                >
+
+                                    <i class="bi bi-box-arrow-right"></i>
+
+                                    <span>
+                                        Logout
+                                    </span>
+
+                                </a>
+
+                            </li>
+
+                        <?php else: ?>
+
+                            <!-- EXIT POS -->
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item d-flex align-items-center gap-2 py-2"
+                                    href="<?= base_url('dashboard') ?>"
+                                >
+
+                                    <i class="bi bi-x-circle text-secondary"></i>
+
+                                    <span>
+                                        Exit POS
+                                    </span>
+
+                                </a>
+
+                            </li>
+
+                        <?php endif; ?>
+
+                    </ul>
 
                 </div>
-
-
-                <!-- =====================================
-                     CASHIER LOGOUT / ADMIN EXIT
-                ====================================== -->
-
-                <?php if (session('user_role') === 'Cashier'): ?>
-
-                    <!-- CASHIER LOGOUT -->
-
-                    <a
-                        href="<?= base_url('logout') ?>"
-                        class="btn btn-outline-danger d-flex align-items-center"
-                    >
-
-                        <i class="bi bi-box-arrow-right me-1"></i>
-
-                        <span>
-                            Logout
-                        </span>
-
-                    </a>
-
-                <?php else: ?>
-
-                    <!-- ADMIN EXIT POS -->
-
-                    <a
-                        href="<?= base_url('dashboard') ?>"
-                        class="btn btn-outline-secondary d-flex align-items-center"
-                    >
-
-                        <i class="bi bi-x-circle me-1"></i>
-
-                        <span>
-                            Exit POS
-                        </span>
-
-                    </a>
-
-                <?php endif; ?>
 
 
             </div>

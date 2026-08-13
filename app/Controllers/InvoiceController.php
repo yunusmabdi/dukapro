@@ -20,13 +20,31 @@ class InvoiceController extends BaseController
         $this->productModel  = new ProductModel();
     }
 
+    /**
+     * Sale History
+     */
+    public function index()
+    {
+        $sales = $this->saleModel
+            ->orderBy('sale_date', 'DESC')
+            ->findAll();
+
+        return view('invoices/index', [
+            'sales' => $sales,
+        ]);
+    }
+
+
+    /**
+     * View individual sale / receipt
+     */
     public function show($invoice)
     {
         $sale = $this->saleModel->find($invoice);
 
         if (!$sale) {
             return redirect()
-                ->to('/pos')
+                ->to('/invoices')
                 ->with('error', 'Sale receipt could not be found.');
         }
 
@@ -50,6 +68,10 @@ class InvoiceController extends BaseController
         ]);
     }
 
+
+    /**
+     * Receipt
+     */
     public function receipt($invoice)
     {
         return $this->show($invoice);
