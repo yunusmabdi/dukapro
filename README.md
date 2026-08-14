@@ -9,7 +9,7 @@
 
 ## 🌐 Live Demo
 
-**[Launch DukaPro →](https://dukapro.rf.gd/)**
+**[Launch DukaPro →]([https://dukapro.rf.gd/index.php/login])**
 
 DukaPro is a web-based **Retail Management and Point of Sale (POS) system** built to help small and medium-sized businesses manage their daily retail operations from a centralized platform.
 
