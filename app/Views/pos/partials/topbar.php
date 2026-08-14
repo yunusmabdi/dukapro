@@ -9,28 +9,24 @@
                  LEFT - POS BRANDING
             ========================================== -->
 
-            <div class="d-flex align-items-center gap-4">
+            <div class="d-flex align-items-center">
 
-                <div class="d-flex align-items-center">
+                <div
+                    class="bg-primary text-white rounded-3 d-flex align-items-center justify-content-center"
+                    style="width:48px;height:48px;"
+                >
+                    <i class="bi bi-grid-fill fs-4"></i>
+                </div>
 
-                    <div
-                        class="bg-primary text-white rounded-3 d-flex align-items-center justify-content-center"
-                        style="width:48px;height:48px;"
-                    >
-                        <i class="bi bi-grid-fill fs-4"></i>
-                    </div>
+                <div class="ms-3">
 
-                    <div class="ms-3">
+                    <h5 class="fw-bold mb-0">
+                        DukaPro POS
+                    </h5>
 
-                        <h5 class="fw-bold mb-0">
-                            NexusERP POS
-                        </h5>
-
-                        <small class="text-muted">
-                            Point of Sale
-                        </small>
-
-                    </div>
+                    <small class="text-muted">
+                        Point of Sale
+                    </small>
 
                 </div>
 
@@ -38,7 +34,7 @@
 
 
             <!-- =========================================
-                 SEARCH
+                 CENTER - PRODUCT SEARCH
             ========================================== -->
 
             <div
@@ -71,10 +67,12 @@
             <div class="d-flex align-items-center flex-wrap gap-2">
 
 
-                <!-- CUSTOMER -->
+                <!-- =====================================
+                     CUSTOMER
+                ====================================== -->
 
                 <button
-                    class="btn btn-light border position-relative cart-button"
+                    class="btn btn-light border d-flex align-items-center justify-content-center gap-2 px-3"
                     type="button"
                 >
 
@@ -87,10 +85,12 @@
                 </button>
 
 
-                <!-- NEW CUSTOMER -->
+                <!-- =====================================
+                     NEW CUSTOMER
+                ====================================== -->
 
                 <button
-                    class="btn btn-primary d-flex align-items-center"
+                    class="btn btn-primary d-flex align-items-center justify-content-center gap-2 px-3"
                     type="button"
                     style="
                         background:#2563EB !important;
@@ -99,7 +99,10 @@
                     "
                 >
 
-                    <i class="bi bi-person-plus me-1"></i>
+                    <i
+                        class="bi bi-person-plus"
+                        style="color:#fff !important;"
+                    ></i>
 
                     <span style="color:#fff !important;">
                         New
@@ -108,17 +111,21 @@
                 </button>
 
 
-                <!-- CART -->
+                <!-- =====================================
+                     CART
+                ====================================== -->
 
                 <button
-                    class="btn btn-dark position-relative"
+                    class="btn btn-dark position-relative d-flex align-items-center justify-content-center gap-2 px-3"
                     id="cartButton"
                     type="button"
                 >
 
                     <i class="bi bi-cart3"></i>
 
-                    Cart
+                    <span>
+                        Cart
+                    </span>
 
                     <span
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
@@ -131,15 +138,17 @@
 
 
                 <!-- =====================================
-                     USER DROPDOWN
+                     USER
                 ====================================== -->
 
                 <?php
+
                     $userName = session('user_name') ?? 'User';
                     $userRole = session('user_role') ?? 'Cashier';
 
                     $isCashier = ($userRole === 'Cashier');
                     $isAdmin   = ($userRole === 'Administrator');
+
                 ?>
 
                 <div class="dropdown">
@@ -152,17 +161,20 @@
                         aria-expanded="false"
                     >
 
-                        <!-- Avatar -->
+
+                        <!-- USER AVATAR -->
 
                         <div
                             class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
                             style="width:42px;height:42px;"
                         >
+
                             <i class="bi bi-person-fill"></i>
+
                         </div>
 
 
-                        <!-- User Details -->
+                        <!-- USER DETAILS -->
 
                         <div class="ms-2 text-start">
 
@@ -177,7 +189,7 @@
                         </div>
 
 
-                        <!-- Arrow -->
+                        <!-- DROPDOWN ARROW -->
 
                         <i class="bi bi-chevron-down ms-3 text-muted"></i>
 
@@ -185,7 +197,7 @@
 
 
                     <!-- =================================
-                         DROPDOWN
+                         USER DROPDOWN
                     ================================== -->
 
                     <ul
@@ -193,6 +205,7 @@
                         aria-labelledby="userDropdown"
                         style="min-width:220px;"
                     >
+
 
                         <!-- USER HEADER -->
 
@@ -220,7 +233,7 @@
 
                         <!-- =================================
                              SALE HISTORY
-                             AVAILABLE TO BOTH
+                             AVAILABLE TO BOTH ROLES
                         ================================== -->
 
                         <li>

@@ -23,7 +23,7 @@ $recentSales   = $recentSales ?? [];
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>NexusERP Dashboard</title>
+    <title>DukaPro Dashboard</title>
 
 
     <!-- Bootstrap Icons -->

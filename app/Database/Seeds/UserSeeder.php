@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
 
             // [
             //     'name'       => 'Administrator',
-            //     'email'      => 'admin@nexuserp.test',
+            //     'email'      => 'admin@dukapro.test',
             //     'password'   => password_hash('password', PASSWORD_DEFAULT),
             //     'role'       => 'Administrator',
             //     'created_at' => date('Y-m-d H:i:s'),
@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
 
             [
                 'name'       => 'Cashier',
-                'email'      => 'cashier@nexuserp.test',
+                'email'      => 'cashier@dukapro.test',
                 'password'   => password_hash('cashier123', PASSWORD_DEFAULT),
                 'role'       => 'Cashier',
                 'created_at' => date('Y-m-d H:i:s'),

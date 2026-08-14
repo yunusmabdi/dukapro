@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?= esc($title ?? 'NexusERP POS') ?></title>
+    <title><?= esc($title ?? 'DukaPro POS') ?></title>
 
     <!-- Bootstrap -->
     <link

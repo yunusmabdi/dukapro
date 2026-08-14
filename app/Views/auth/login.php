@@ -12,7 +12,7 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Sign In - NexusERP</title>
+<title>Sign In - DukaPro</title>
 
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -914,7 +914,7 @@
 
             </div>
 
-            <span>NexusERP</span>
+            <span>DukaPro</span>
 
         </div>
 
@@ -999,7 +999,7 @@
 
     <div class="brand-footer">
 
-        © <?= date('Y') ?> NexusERP.
+        © <?= date('Y') ?> DukaPro.
         All rights reserved.
 
     </div>
@@ -1028,7 +1028,7 @@
 
             </div>
 
-            NexusERP
+            DukaPro
 
         </div>
 
@@ -1364,7 +1364,7 @@
                 ></i>
 
 
-                Secure access to your NexusERP
+                Secure access to your DukaPro
                 workspace
 
 

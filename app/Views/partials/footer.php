@@ -1,3 +1,3 @@
 <footer class="text-center py-3">
-    © <?= date('Y') ?> NexusERP
+    © <?= date('Y') ?> DukaPro
 </footer>

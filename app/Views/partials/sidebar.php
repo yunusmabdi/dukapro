@@ -21,7 +21,7 @@ $segment = service('uri')->getSegment(1);
         </div>
 
         <div>
-            <h3>NexusERP</h3>
+            <h3>DukaPro</h3>
             <small>Enterprise Suite</small>
         </div>
 

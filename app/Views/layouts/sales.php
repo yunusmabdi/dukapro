@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title><?= $title ?? 'Sales History - NexusERP' ?></title>
+    <title><?= $title ?? 'Sales History - DukaPro' ?></title>
 
 
     <!-- Bootstrap -->
@@ -75,7 +75,7 @@
                 <div>
 
                     <div class="fw-bold">
-                        NexusERP
+                        DukaPro
                     </div>
 
                     <small class="text-muted">
