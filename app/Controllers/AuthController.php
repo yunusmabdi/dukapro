@@ -123,7 +123,66 @@ class AuthController extends BaseController
         // Administrator → Dashboard
         return redirect()->to(base_url('/dashboard'));
     }
+    /**
+ * Admin Demo Login.
+ */
+public function demoAdmin()
+{
+    $user = $this->userModel
+        ->where('role', 'Administrator')
+        ->first();
 
+    if (!$user) {
+        return redirect()
+            ->to('/login')
+            ->with('error', 'Admin demo account is unavailable.');
+    }
+
+    session()->regenerate(true);
+
+    session()->set([
+        'user_id'    => $user['id'],
+        'name'       => $user['name'],
+        'user_name'  => $user['name'],
+        'user_role'  => $user['role'],
+        'logged_in'  => true,
+        'demo_mode'  => true,
+        'demo_role'  => 'Administrator',
+    ]);
+
+    return redirect()->to(base_url('/dashboard'));
+}
+
+
+/**
+ * Cashier / POS Demo Login.
+ */
+public function demoCashier()
+    {
+        $user = $this->userModel
+            ->where('role', 'Cashier')
+            ->first();
+
+        if (!$user) {
+            return redirect()
+                ->to('/login')
+                ->with('error', 'POS demo account is unavailable.');
+        }
+
+        session()->regenerate(true);
+
+        session()->set([
+            'user_id'    => $user['id'],
+            'name'       => $user['name'],
+            'user_name'  => $user['name'],
+            'user_role'  => $user['role'],
+            'logged_in'  => true,
+            'demo_mode'  => true,
+            'demo_role'  => 'Cashier',
+        ]);
+
+        return redirect()->to(base_url('/pos'));
+    }
 
     /**
      * Logout.

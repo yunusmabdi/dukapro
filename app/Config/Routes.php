@@ -21,6 +21,9 @@ $routes->post('login', 'AuthController::authenticate');
 
 $routes->get('logout', 'AuthController::logout');
 
+$routes->post('demo/admin', 'AuthController::demoAdmin');
+
+$routes->post('demo/cashier', 'AuthController::demoCashier');
 
 /*
 |--------------------------------------------------------------------------
