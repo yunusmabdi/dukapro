@@ -216,32 +216,6 @@ The cashier interface is intentionally separated from administrative functionali
 
 ---
 
-## 🖥️ Screenshots
-
-### Dashboard
-
-![DukaPro Dashboard](screenshots/dashboard.png)
-
-### Point of Sale
-
-![DukaPro Point of Sale](screenshots/pos.png)
-
-### Products
-
-![DukaPro Products](screenshots/products.png)
-
-### Inventory
-
-![DukaPro Inventory](screenshots/inventory.png)
-
-### Checkout
-
-![DukaPro Checkout](screenshots/checkout.png)
-
-> Screenshots show the actual DukaPro application interface.
-
----
-
 ## 🧱 Technology Stack
 
 ### Backend
