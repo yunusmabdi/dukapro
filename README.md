@@ -1,69 +1,491 @@
-# CodeIgniter 4 Application Starter
+# 🛒 DukaPro — Retail Management & Point of Sale System
 
-## What is CodeIgniter?
+![CodeIgniter](https://img.shields.io/badge/CodeIgniter-4-orange?logo=codeigniter)
+![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php\&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql\&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap\&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Live-success)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## 🌐 Live Demo
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+**[Launch DukaPro →](https://dukapro.rf.gd/index.php/login)**
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+DukaPro is a web-based **Retail Management and Point of Sale (POS) system** built to help small and medium-sized businesses manage their daily retail operations from a centralized platform.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+The system combines **sales, inventory, products, suppliers, purchases, customers, users and POS operations** into a single application.
 
-## Installation & updates
+---
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## 📖 About DukaPro
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+DukaPro is designed around the day-to-day workflow of a retail business.
 
-## Setup
+From adding products and receiving stock to processing customer purchases at the POS, the system provides a centralized environment for managing retail operations.
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+The application supports different user roles, allowing administrators to manage the business while cashiers focus on processing sales through a dedicated POS interface.
 
-## Important Change with index.php
+### Key objectives
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+* Simplify retail sales operations
+* Improve inventory visibility
+* Reduce manual record keeping
+* Provide role-based access
+* Centralize product and supplier management
+* Track purchases and sales
+* Provide a fast cashier-focused POS experience
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+---
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## ✨ Features
 
-## Repository Management
+| Module             | Functionality                                 |
+| ------------------ | --------------------------------------------- |
+| 🔐 Authentication  | Secure login and session-based authentication |
+| 👥 User Management | Manage system users and roles                 |
+| 📊 Dashboard       | Overview of business operations               |
+| 🛒 Point of Sale   | Product selection, cart and checkout          |
+| 💰 Payments        | Cash, M-Pesa and card payment support         |
+| 📦 Products        | Product management, SKU and barcode support   |
+| 🏷️ Categories     | Organize products into categories             |
+| 🚚 Suppliers       | Manage suppliers and supplier information     |
+| 📥 Purchases       | Record purchases and receive stock            |
+| 📦 Inventory       | Monitor stock and stock movements             |
+| 🧾 Sales           | Record and manage completed transactions      |
+| 👤 Customers       | Manage customer information                   |
+| 📈 Reports         | Monitor business and sales information        |
+| 🔑 Roles           | Separate administrator and cashier access     |
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+---
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+## 🛒 Point of Sale
 
-## Server Requirements
+DukaPro includes a dedicated POS interface designed for efficient cashier operations.
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+Cashiers can:
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+* Browse products
+* Filter products by category
+* Add products to the cart
+* Adjust quantities
+* View cart totals
+* Apply discounts
+* Calculate tax
+* Select payment methods
+* Process cash payments
+* Process M-Pesa payments
+* Process card payments
+* Calculate customer change
+* Complete sales
+* Save transactions as drafts
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+The POS interface is designed to keep the cashier workflow simple and focused on completing transactions quickly.
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+---
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+## 💳 Payment Processing
+
+DukaPro supports multiple payment methods.
+
+### 💵 Cash
+
+Cashiers enter the amount received from the customer.
+
+The system automatically calculates:
+
+```text
+Change = Amount Received - Total
+```
+
+Transactions cannot be completed when the amount received is less than the amount payable.
+
+### 📱 M-Pesa
+
+M-Pesa transactions support:
+
+* Payment amount
+* Transaction/reference number
+* Required-field validation
+
+### 💳 Card
+
+Card payments support:
+
+* Payment amount
+* Transaction/reference number
+* Required-field validation
+
+---
+
+## 📦 Inventory Management
+
+DukaPro provides inventory functionality for monitoring products throughout the purchasing and sales lifecycle.
+
+Inventory features include:
+
+* Stock quantity tracking
+* Minimum stock levels
+* Product status
+* Stock movement tracking
+* Purchase receiving
+* Stock updates after sales
+* Low-stock monitoring
+* Product identification using SKU and barcode
+
+This allows businesses to maintain better visibility of available stock and identify products that require replenishment.
+
+---
+
+## 🧾 Sales Management
+
+Completed POS transactions are recorded as sales.
+
+Sales records contain information such as:
+
+* Invoice number
+* Customer
+* Cashier
+* Sale date
+* Subtotal
+* Discount
+* Tax
+* Total
+* Payment method
+* Amount paid
+* Change
+* Transaction status
+
+Each sale can also contain multiple sale items with their respective quantities, prices and totals.
+
+---
+
+## 📥 Purchase Management
+
+DukaPro supports the purchasing side of the retail workflow.
+
+Businesses can:
+
+* Manage suppliers
+* Create purchase records
+* Add purchase items
+* Track purchase quantities
+* Receive purchases
+* Update inventory through received stock
+
+This connects purchasing activity directly with inventory management.
+
+---
+
+## 🔐 Role-Based Access
+
+DukaPro provides different experiences depending on the user's role.
+
+### 👨‍💼 Administrator
+
+Administrators have access to the broader management system.
+
+Administrator functionality includes:
+
+* Dashboard
+* Products
+* Categories
+* Suppliers
+* Purchases
+* Inventory
+* Sales
+* Customers
+* Reports
+* User management
+* POS
+
+### 🧑‍💼 Cashier
+
+Cashiers are provided with a dedicated POS experience.
+
+They can:
+
+* Access the POS
+* Browse products
+* Manage the shopping cart
+* Process payments
+* Complete sales
+* Save drafts
+* Log out of the system
+
+The cashier interface is intentionally separated from administrative functionality.
+
+---
+
+## 🧱 Technology Stack
+
+### Backend
+
+* **PHP 8.4**
+* **CodeIgniter 4**
+* **MySQL**
+
+### Frontend
+
+* **HTML5**
+* **CSS3**
+* **Bootstrap 5**
+* **Bootstrap Icons**
+* **JavaScript**
+
+### Development Tools
+
+* Git
+* GitHub
+* Composer
+* MySQL
+* CodeIgniter Migrations
+* CodeIgniter Seeders
+
+---
+
+## 🏗️ Architecture
+
+DukaPro follows the **Model-View-Controller (MVC)** architecture provided by CodeIgniter 4.
+
+```text
+DukaPro
+│
+├── Authentication
+│
+├── Dashboard
+│
+├── POS
+│   ├── Product Search
+│   ├── Product Grid
+│   ├── Shopping Cart
+│   ├── Checkout
+│   └── Payments
+│
+├── Products
+│
+├── Categories
+│
+├── Suppliers
+│
+├── Purchases
+│
+├── Inventory
+│
+├── Sales
+│
+├── Customers
+│
+└── Reports
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+app/
+├── Controllers/
+│
+├── Models/
+│
+├── Views/
+│   ├── layouts/
+│   ├── dashboard/
+│   ├── pos/
+│   ├── products/
+│   ├── categories/
+│   ├── suppliers/
+│   ├── purchases/
+│   ├── inventory/
+│   └── sales/
+│
+├── Database/
+│   ├── Migrations/
+│   └── Seeds/
+│
+public/
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+writable/
+│
+.env
+composer.json
+spark
+```
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+cd DukaPro
+```
+
+### 2. Install dependencies
+
+```bash
+composer install
+```
+
+### 3. Configure environment
+
+Create your environment configuration:
+
+```bash
+cp env .env
+```
+
+Configure your database inside `.env`:
+
+```env
+database.default.hostname = localhost
+database.default.database = dukapro
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+```
+
+### 4. Create the database
+
+Create a MySQL database:
+
+```text
+dukapro
+```
+
+### 5. Run migrations
+
+```bash
+php spark migrate
+```
+
+### 6. Run seeders
+
+```bash
+php spark db:seed DatabaseSeeder
+```
+
+### 7. Start the development server
+
+```bash
+php spark serve
+```
+
+Open:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## 🧪 Development
+
+DukaPro is being developed using an incremental modular approach.
+
+The system is structured so that individual business modules can be developed and maintained independently while sharing the same authentication, database and application architecture.
+
+Core areas include:
+
+* Authentication
+* Role management
+* Product management
+* POS
+* Checkout
+* Inventory
+* Purchases
+* Sales
+* Customers
+* Reporting
+
+---
+
+## 🗺️ Roadmap
+
+* [x] CodeIgniter 4 application foundation
+* [x] Authentication
+* [x] Administrator role
+* [x] Cashier role
+* [x] Dashboard
+* [x] Product management
+* [x] Category management
+* [x] Supplier management
+* [x] POS interface
+* [x] Product filtering
+* [x] Shopping cart
+* [x] Checkout
+* [x] Cash payment support
+* [x] M-Pesa payment support
+* [x] Card payment support
+* [x] Purchase management
+* [x] Inventory management
+* [x] Sales management
+* [x] Live deployment
+* [ ] Advanced reporting
+* [ ] Receipt printing improvements
+* [ ] Additional business analytics
+
+---
+
+## 🌐 Deployment
+
+DukaPro is deployed online and can be accessed through:
+
+**https://dukapro.rf.gd/**
+
+The application is currently hosted on InfinityFree for demonstration and portfolio purposes.
+
+---
+
+## 👨‍💻 Developer
+
+### Yunus Abdi
+
+**Computer Science Graduate | Software Developer**
+
+DukaPro was developed as a practical full-stack application focused on solving real-world retail management problems.
+
+My interests include:
+
+* Full-Stack Development
+* Backend Development
+* Database Systems
+* Enterprise Applications
+* Business Intelligence
+* Data Analytics
+* Software Architecture
+
+### GitHub
+
+**GitHub Repository:** `YOUR_GITHUB_REPOSITORY_URL`
+
+---
+
+## ⭐ Why DukaPro?
+
+DukaPro demonstrates the ability to build a complete business application rather than an isolated CRUD project.
+
+The system brings together:
+
+**Authentication → Products → Purchases → Inventory → POS → Checkout → Sales**
+
+This creates a connected retail workflow where business operations are represented throughout the application.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## ⭐ Support
+
+If you find DukaPro useful or interesting, consider giving the repository a ⭐ on GitHub.
