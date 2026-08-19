@@ -23,19 +23,20 @@
             href="<?= site_url('purchases/create') ?>"
             class="btn btn-primary">
 
-            <i class="bi bi-plus-lg"></i>
+            <i class="bi bi-plus-lg me-1"></i>
             New Purchase
 
         </a>
 
     </div>
 
+
     <!-- Flash Message -->
     <?php if (session()->getFlashdata('success')): ?>
 
         <div class="alert alert-success alert-dismissible fade show">
 
-            <?= session()->getFlashdata('success') ?>
+            <?= esc(session()->getFlashdata('success')) ?>
 
             <button
                 type="button"
@@ -47,73 +48,17 @@
 
     <?php endif; ?>
 
-    <!-- Search -->
-    <div class="card border-0 shadow-sm mb-4">
-
-        <div class="card-body">
-
-            <form
-                method="get"
-                action="<?= site_url('purchases') ?>">
-
-                <div class="row g-3">
-
-                    <div class="col-md-6">
-
-                        <input
-                            type="text"
-                            name="search"
-                            class="form-control"
-                            placeholder="Search purchase number or supplier..."
-                            value="<?= esc($search ?? '') ?>">
-
-                    </div>
-
-                    <div class="col-md-2 d-grid">
-
-                        <button
-                            class="btn btn-primary"
-                            type="submit">
-
-                            <i class="bi bi-search"></i>
-                            Search
-
-                        </button>
-
-                    </div>
-
-                    <?php if (! empty($search)): ?>
-
-                        <div class="col-md-2 d-grid">
-
-                            <a
-                                href="<?= site_url('purchases') ?>"
-                                class="btn btn-outline-secondary">
-
-                                Clear
-
-                            </a>
-
-                        </div>
-
-                    <?php endif; ?>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
 
     <!-- Purchases Table -->
     <div class="card border-0 shadow-sm">
 
-        <div class="card-body p-0">
+        <div class="card-body">
 
             <div class="table-responsive">
 
-                <table class="table table-hover align-middle mb-0">
+                <table
+                    id="purchasesTable"
+                    class="table table-hover align-middle mb-0 data-table">
 
                     <thead class="table-light">
 
@@ -133,21 +78,28 @@
                             Total
                         </th>
 
-                        <th class="text-center">
+                        <th
+                            class="text-center"
+                            style="width:150px;">
+
                             Actions
+
                         </th>
 
                     </tr>
 
                     </thead>
 
+
                     <tbody>
 
-                    <?php if (! empty($purchases)): ?>
+                    <?php if (!empty($purchases)): ?>
 
                         <?php foreach ($purchases as $purchase): ?>
 
                             <tr>
+
+                                <!-- ID -->
 
                                 <td>
 
@@ -155,59 +107,99 @@
 
                                 </td>
 
+
+                                <!-- Purchase Number -->
+
                                 <td>
 
-                                    <span class="fw-semibold">
+                                    <span class="fw-semibold text-primary">
 
-                                        <?= esc($purchase['purchase_number']) ?>
+                                        <?= esc(
+                                            $purchase['purchase_number']
+                                        ) ?>
 
                                     </span>
 
                                 </td>
 
-                                <td>
 
-                                    <?= esc($purchase['company_name']) ?>
-
-                                </td>
+                                <!-- Supplier -->
 
                                 <td>
 
-                                    <?= date('d M Y', strtotime($purchase['purchase_date'])) ?>
+                                    <?= esc(
+                                        $purchase['company_name']
+                                    ) ?>
 
                                 </td>
+
+
+                                <!-- Date -->
+
+                                <td>
+
+                                    <?= date(
+                                        'd M Y',
+                                        strtotime(
+                                            $purchase['purchase_date']
+                                        )
+                                    ) ?>
+
+                                </td>
+
+
+                                <!-- Status -->
 
                                 <td>
 
                                     <?php
 
-                                    $badge = match ($purchase['status']) {
+                                    $badge = match (
+                                        $purchase['status']
+                                    ) {
 
-                                        'Pending' => 'warning',
+                                        'Pending' =>
+                                            'warning',
 
-                                        'Received' => 'success',
+                                        'Received' =>
+                                            'success',
 
-                                        'Cancelled' => 'danger',
+                                        'Cancelled' =>
+                                            'danger',
 
-                                        default => 'secondary'
+                                        default =>
+                                            'secondary'
 
                                     };
 
                                     ?>
 
-                                    <span class="badge bg-<?= $badge ?>">
+                                    <span
+                                        class="badge bg-<?= $badge ?>">
 
-                                        <?= esc($purchase['status']) ?>
+                                        <?= esc(
+                                            $purchase['status']
+                                        ) ?>
 
                                     </span>
 
                                 </td>
 
+
+                                <!-- Total -->
+
                                 <td class="text-end fw-semibold">
 
-                                    <?= number_format($purchase['total_amount'], 2) ?>
+                                    KES
+                                    <?= number_format(
+                                        (float) $purchase['total_amount'],
+                                        2
+                                    ) ?>
 
                                 </td>
+
+
+                                <!-- Actions -->
 
                                 <td class="text-center">
 
@@ -224,17 +216,25 @@
                                         </button>
 
 
-                                        <ul class="dropdown-menu dropdown-menu-end">
+                                        <ul
+                                            class="dropdown-menu dropdown-menu-end">
 
 
                                             <!-- View -->
+
                                             <li>
 
                                                 <a
                                                     class="dropdown-item"
-                                                    href="<?= site_url('purchases/show/' . $purchase['id']) ?>">
+                                                    href="<?= site_url(
+                                                        'purchases/show/' .
+                                                        $purchase['id']
+                                                    ) ?>">
 
-                                                    <i class="bi bi-eye me-2"></i>
+                                                    <i
+                                                        class="bi bi-eye me-2">
+                                                    </i>
+
                                                     View
 
                                                 </a>
@@ -242,17 +242,27 @@
                                             </li>
 
 
-                                            <?php if ($purchase['status'] === 'Pending'): ?>
+                                            <?php if (
+                                                $purchase['status']
+                                                === 'Pending'
+                                            ): ?>
 
 
                                                 <!-- Edit -->
+
                                                 <li>
 
                                                     <a
                                                         class="dropdown-item"
-                                                        href="<?= site_url('purchases/edit/' . $purchase['id']) ?>">
+                                                        href="<?= site_url(
+                                                            'purchases/edit/' .
+                                                            $purchase['id']
+                                                        ) ?>">
 
-                                                        <i class="bi bi-pencil me-2"></i>
+                                                        <i
+                                                            class="bi bi-pencil me-2">
+                                                        </i>
+
                                                         Edit
 
                                                     </a>
@@ -261,24 +271,35 @@
 
 
                                                 <li>
-                                                    <hr class="dropdown-divider">
+
+                                                    <hr
+                                                        class="dropdown-divider">
+
                                                 </li>
 
 
                                                 <!-- Receive -->
+
                                                 <li>
 
                                                     <form
-                                                        action="<?= site_url('purchases/receive/' . $purchase['id']) ?>"
+                                                        action="<?= site_url(
+                                                            'purchases/receive/' .
+                                                            $purchase['id']
+                                                        ) ?>"
                                                         method="post">
 
                                                         <?= csrf_field() ?>
 
                                                         <button
+                                                            type="submit"
                                                             class="dropdown-item text-success"
                                                             onclick="return confirm('Receive this purchase and update inventory?')">
 
-                                                            <i class="bi bi-box-seam me-2"></i>
+                                                            <i
+                                                                class="bi bi-box-seam me-2">
+                                                            </i>
+
                                                             Receive Purchase
 
                                                         </button>
@@ -289,19 +310,27 @@
 
 
                                                 <!-- Cancel -->
+
                                                 <li>
 
                                                     <form
-                                                        action="<?= site_url('purchases/cancel/' . $purchase['id']) ?>"
+                                                        action="<?= site_url(
+                                                            'purchases/cancel/' .
+                                                            $purchase['id']
+                                                        ) ?>"
                                                         method="post">
 
                                                         <?= csrf_field() ?>
 
                                                         <button
+                                                            type="submit"
                                                             class="dropdown-item text-danger"
                                                             onclick="return confirm('Cancel this purchase?')">
 
-                                                            <i class="bi bi-x-circle me-2"></i>
+                                                            <i
+                                                                class="bi bi-x-circle me-2">
+                                                            </i>
+
                                                             Cancel Purchase
 
                                                         </button>
@@ -324,7 +353,9 @@
 
                         <?php endforeach; ?>
 
+
                     <?php else: ?>
+
 
                         <tr>
 
@@ -332,10 +363,14 @@
                                 colspan="7"
                                 class="text-center py-5">
 
-                                <i class="bi bi-cart-x display-5 text-muted"></i>
+                                <i
+                                    class="bi bi-cart-x display-5 text-muted">
+                                </i>
 
                                 <h5 class="mt-3">
+
                                     No purchases found
+
                                 </h5>
 
                                 <p class="text-muted">
@@ -345,10 +380,14 @@
                                 </p>
 
                                 <a
-                                    href="<?= site_url('purchases/create') ?>"
+                                    href="<?= site_url(
+                                        'purchases/create'
+                                    ) ?>"
                                     class="btn btn-primary">
 
-                                    <i class="bi bi-plus-lg"></i>
+                                    <i
+                                        class="bi bi-plus-lg me-1">
+                                    </i>
 
                                     New Purchase
 
@@ -357,6 +396,7 @@
                             </td>
 
                         </tr>
+
 
                     <?php endif; ?>
 
@@ -368,18 +408,119 @@
 
         </div>
 
-        <?php if (isset($pager)): ?>
-
-            <div class="card-footer bg-white">
-
-                <?= $pager->links() ?>
-
-            </div>
-
-        <?php endif; ?>
-
     </div>
 
 </div>
+
+
+<!-- =====================================================
+     DATATABLES
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        if (
+            typeof DataTable === 'undefined'
+        ) {
+
+            console.error(
+                'DataTables is not loaded.'
+            );
+
+            return;
+
+        }
+
+
+        new DataTable(
+            '#purchasesTable',
+            {
+
+                pageLength: 10,
+
+                lengthMenu: [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, 'All']
+                ],
+
+
+                /*
+                -----------------------------------------
+                Default sorting
+                -----------------------------------------
+                */
+
+                order: [
+                    [0, 'desc']
+                ],
+
+
+                /*
+                -----------------------------------------
+                Actions column
+                -----------------------------------------
+                */
+
+                columnDefs: [
+
+                    {
+                        targets: 6,
+                        orderable: false,
+                        searchable: false
+                    }
+
+                ],
+
+
+                /*
+                -----------------------------------------
+                Language
+                -----------------------------------------
+                */
+
+                language: {
+
+                    search: "",
+
+                    searchPlaceholder:
+                        "Search purchases...",
+
+                    lengthMenu:
+                        "Show _MENU_ purchases",
+
+                    info:
+                        "Showing _START_ to _END_ of _TOTAL_ purchases",
+
+                    infoEmpty:
+                        "No purchases found",
+
+                    zeroRecords:
+                        "No matching purchases found",
+
+                    emptyTable:
+                        "No purchases available",
+
+                    paginate: {
+
+                        previous: "Previous",
+
+                        next: "Next"
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
 
 <?= $this->endSection() ?>

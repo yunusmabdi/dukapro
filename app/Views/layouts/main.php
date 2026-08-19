@@ -22,7 +22,64 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/navbar.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css') ?>">
 </head>
+<!-- DataTables -->
+<link
+    rel="stylesheet"
+    href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css"
+>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll('.data-table').forEach(function (table) {
+
+        new DataTable(table, {
+
+            pageLength: 10,
+
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, 'All']
+            ],
+
+            ordering: true,
+
+            searching: true,
+
+            paging: true,
+
+            info: true,
+
+            language: {
+
+                search: "Search:",
+
+                searchPlaceholder: "Search records...",
+
+                lengthMenu: "Show _MENU_ records",
+
+                info: "Showing _START_ to _END_ of _TOTAL_ records",
+
+                emptyTable: "No records found",
+
+                zeroRecords: "No matching records found"
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
 <body>
 
     <?= $this->include('partials/sidebar') ?>

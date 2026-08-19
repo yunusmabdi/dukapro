@@ -1,5 +1,21 @@
 <?php
 $segment = service('uri')->getSegment(1);
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard values supplied by DashboardController
+|--------------------------------------------------------------------------
+*/
+
+$todaySales = $todaySales ?? 0;
+$ordersToday = $ordersToday ?? 0;
+$totalProducts = $totalProducts ?? 0;
+$lowStockProducts = $lowStockProducts ?? 0;
+
+$salesChange = $salesChange ?? 0;
+$ordersChange = $ordersChange ?? 0;
+
+$salesOverview = $salesOverview ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -9,9 +25,13 @@ $segment = service('uri')->getSegment(1);
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>DukaPro Dashboard</title>
+
 
     <!-- Bootstrap Icons -->
     <link
@@ -19,20 +39,19 @@ $segment = service('uri')->getSegment(1);
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
+
     <!-- Sidebar CSS -->
     <link
         rel="stylesheet"
         href="<?= base_url('assets/css/sidebar.css') ?>"
     >
 
+
     <style>
 
-        /*
-         * KEEP ALL YOUR EXISTING DASHBOARD CSS HERE.
-         *
-         * Remove ONLY the sidebar-related CSS that was moved
-         * into sidebar.css.
-         */
+        /* =========================================
+           GLOBAL
+        ========================================== */
 
         * {
             margin: 0;
@@ -40,26 +59,32 @@ $segment = service('uri')->getSegment(1);
             box-sizing: border-box;
         }
 
+
         body {
-            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                         Roboto, Helvetica, Arial, sans-serif;
+            font-family: Inter, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
             background: #f5f7fb;
+
             color: #172033;
+
             min-height: 100vh;
         }
 
+
         a {
             text-decoration: none;
+
             color: inherit;
         }
 
 
         /* =========================================
            MAIN CONTENT
-        ========================================= */
+        ========================================== */
 
         .main {
+
             margin-left: 270px;
 
             min-height: 100vh;
@@ -69,45 +94,33 @@ $segment = service('uri')->getSegment(1);
             transition: margin-left .3s ease;
         }
 
+
         .main.expanded {
+
             margin-left: 0;
         }
 
 
         /* =========================================
            TOP BAR
-        ========================================= */
+        ========================================== */
 
         .topbar {
+
             display: flex;
 
             align-items: center;
+
             justify-content: space-between;
 
             margin-bottom: 28px;
         }
 
-        .page-title h1 {
-            font-size: 30px;
-
-            font-weight: 700;
-
-            margin-bottom: 5px;
-        }
-
-        .page-title p {
-            color: #64748b;
-
-            font-size: 14px;
-        }
-
-
-        /* =========================================
-           SIDEBAR TOGGLE
-        ========================================= */
 
         .toggle-sidebar {
+
             width: 42px;
+
             height: 42px;
 
             border: none;
@@ -118,7 +131,8 @@ $segment = service('uri')->getSegment(1);
 
             color: #334155;
 
-            box-shadow: 0 4px 15px rgba(15, 23, 42, .08);
+            box-shadow:
+                0 4px 15px rgba(15, 23, 42, .08);
 
             cursor: pointer;
 
@@ -127,19 +141,19 @@ $segment = service('uri')->getSegment(1);
             transition: all .2s ease;
         }
 
+
         .toggle-sidebar:hover {
+
             background: #2563eb;
 
             color: #fff;
         }
 
 
-        /* =========================================
-           DATE
-        ========================================= */
-
         .date-box {
+
             display: flex;
+
             align-items: center;
 
             gap: 8px;
@@ -159,85 +173,145 @@ $segment = service('uri')->getSegment(1);
 
 
         /* =========================================
-           YOUR EXISTING DASHBOARD CSS
-           
-           Keep:
-           - .stats-grid
-           - .stat-card
-           - .stat-top
-           - .stat-icon
-           - .stat-label
-           - .stat-value
-           - .stat-change
-           - .dashboard-grid
-           - .card
-           - .card-header
-           - .card-body
-           - .chart
-           - .quick-actions
-           - .quick-action
-           - responsive dashboard CSS
-        ========================================= */
+           PAGE TITLE
+        ========================================== */
+
+        .page-title {
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-title h1 {
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+        }
+
+
+        .page-title p {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           STATISTICS
+        ========================================== */
 
         .stats-grid {
+
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
             gap: 18px;
+
             margin-bottom: 22px;
         }
 
+
         .stat-card {
+
             background: #fff;
+
             border: 1px solid #e8edf4;
+
             border-radius: 18px;
+
             padding: 20px;
-            box-shadow: 0 5px 20px rgba(15, 23, 42, .04);
+
+            box-shadow:
+                0 5px 20px rgba(15, 23, 42, .04);
         }
 
+
         .stat-top {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             margin-bottom: 18px;
         }
 
+
         .stat-icon {
+
             width: 42px;
+
             height: 42px;
 
             border-radius: 12px;
 
             background: #eff6ff;
+
             color: #2563eb;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-size: 19px;
         }
 
+
         .stat-label {
+
             color: #64748b;
+
             font-size: 13px;
         }
 
+
         .stat-value {
+
             font-size: 27px;
+
             font-weight: 700;
+
             margin-bottom: 8px;
+
+            color: #172033;
         }
 
+
         .stat-change {
+
             font-size: 12px;
+
             color: #16a34a;
         }
 
+
         .stat-change.warning {
+
             color: #dc2626;
         }
 
+
+        .stat-change.neutral {
+
+            color: #64748b;
+        }
+
+
+        /* =========================================
+           LOWER DASHBOARD
+        ========================================== */
+
         .dashboard-grid {
+
             display: grid;
 
             grid-template-columns:
@@ -247,17 +321,24 @@ $segment = service('uri')->getSegment(1);
             gap: 20px;
         }
 
+
         .card {
+
             background: #fff;
 
             border: 1px solid #e8edf4;
 
             border-radius: 18px;
 
-            box-shadow: 0 5px 20px rgba(15, 23, 42, .04);
+            box-shadow:
+                0 5px 20px rgba(15, 23, 42, .04);
+
+            overflow: hidden;
         }
 
+
         .card-header {
+
             display: flex;
 
             justify-content: space-between;
@@ -269,27 +350,46 @@ $segment = service('uri')->getSegment(1);
             border-bottom: 1px solid #eef2f7;
         }
 
+
         .card-header h3 {
+
             font-size: 16px;
+
+            font-weight: 600;
         }
 
+
         .card-header span {
+
             color: #64748b;
+
             font-size: 12px;
         }
 
+
         .card-body {
+
             padding: 20px;
         }
 
-        .chart {
+
+        /* =========================================
+           SALES CHART
+        ========================================== */
+
+        .sales-chart {
+
             height: 280px;
 
             display: flex;
-            align-items: center;
-            justify-content: center;
 
-            color: #94a3b8;
+            align-items: flex-end;
+
+            justify-content: space-around;
+
+            gap: 15px;
+
+            padding: 20px;
 
             background:
                 repeating-linear-gradient(
@@ -302,16 +402,122 @@ $segment = service('uri')->getSegment(1);
             border-radius: 12px;
         }
 
+
+        .chart-column {
+
+            height: 100%;
+
+            flex: 1;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 7px;
+
+            min-width: 0;
+        }
+
+
+        .chart-value {
+
+            font-size: 10px;
+
+            color: #64748b;
+
+            white-space: nowrap;
+        }
+
+
+        .chart-bar-wrapper {
+
+            height: 200px;
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: center;
+        }
+
+
+        .chart-bar {
+
+            width: 100%;
+
+            max-width: 48px;
+
+            min-height: 4px;
+
+            background: #2563eb;
+
+            border-radius: 8px 8px 3px 3px;
+
+            transition:
+                height .3s ease,
+                opacity .2s ease;
+        }
+
+
+        .chart-bar:hover {
+
+            opacity: .8;
+        }
+
+
+        .chart-label {
+
+            font-size: 11px;
+
+            color: #64748b;
+
+            font-weight: 500;
+        }
+
+
+        .empty-chart {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           QUICK ACTIONS
+        ========================================== */
+
         .quick-actions {
+
             display: grid;
 
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns:
+                repeat(2, 1fr);
 
             gap: 12px;
         }
 
+
         .quick-action {
+
             display: flex;
+
             align-items: center;
 
             gap: 10px;
@@ -329,7 +535,17 @@ $segment = service('uri')->getSegment(1);
             transition: .2s;
         }
 
+
+        .quick-action i {
+
+            font-size: 17px;
+
+            color: #2563eb;
+        }
+
+
         .quick-action:hover {
+
             border-color: #2563eb;
 
             color: #2563eb;
@@ -339,19 +555,22 @@ $segment = service('uri')->getSegment(1);
 
 
         /* =========================================
-           RESPONSIVE DASHBOARD
-        ========================================= */
+           RESPONSIVE
+        ========================================== */
 
         @media (max-width: 1100px) {
 
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
+
 
             .dashboard-grid {
+
                 grid-template-columns: 1fr;
             }
-
         }
 
 
@@ -359,14 +578,52 @@ $segment = service('uri')->getSegment(1);
 
             .main,
             .main.expanded {
+
                 margin-left: 0;
+
                 padding: 20px;
             }
 
+
             .stats-grid {
+
                 grid-template-columns: 1fr;
             }
 
+
+            .topbar {
+
+                margin-bottom: 20px;
+            }
+
+
+            .page-title h1 {
+
+                font-size: 25px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .quick-actions {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .date-box {
+
+                font-size: 12px;
+
+                padding: 9px 11px;
+            }
+
+
+            .stat-value {
+
+                font-size: 24px;
+            }
         }
 
     </style>
@@ -376,15 +633,30 @@ $segment = service('uri')->getSegment(1);
 
 <body>
 
-    <!-- SIDEBAR -->
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
     <?= view('partials/sidebar') ?>
 
 
-    <!-- MAIN -->
-    <main class="main" id="main">
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
 
-        <!-- TOP BAR -->
+    <main
+        class="main"
+        id="main"
+    >
+
+
+        <!-- =====================================
+             TOP BAR
+        ====================================== -->
+
         <div class="topbar">
+
 
             <button
                 class="toggle-sidebar"
@@ -392,8 +664,11 @@ $segment = service('uri')->getSegment(1);
                 title="Toggle sidebar"
                 type="button"
             >
+
                 <i class="bi bi-list"></i>
+
             </button>
+
 
             <div class="date-box">
 
@@ -403,32 +678,49 @@ $segment = service('uri')->getSegment(1);
 
             </div>
 
+
         </div>
 
 
-        <!-- PAGE TITLE -->
+
+        <!-- =====================================
+             PAGE TITLE
+        ====================================== -->
+
         <div class="page-title">
 
-            <h1>Dashboard</h1>
+            <h1>
+                Dashboard
+            </h1>
+
 
             <p>
+
                 Welcome back,
-                <?= session('user_name') ?? 'Administrator' ?>.
-                Here's what's happening with your business today.
+                <?= esc(session('user_name') ?? 'Administrator') ?>.
+
+                Here's what's happening with your
+                business today.
+
             </p>
 
         </div>
 
 
-        <br>
 
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
 
-        <!-- YOUR EXISTING DASHBOARD CONTENT GOES HERE -->
-
-        <!-- STATISTICS -->
         <div class="stats-grid">
 
+
+            <!-- =================================
+                 TODAY'S SALES
+            ================================== -->
+
             <div class="stat-card">
+
 
                 <div class="stat-top">
 
@@ -436,25 +728,62 @@ $segment = service('uri')->getSegment(1);
                         Today's Sales
                     </div>
 
+
                     <div class="stat-icon">
+
                         <i class="bi bi-currency-exchange"></i>
+
                     </div>
 
                 </div>
 
+
                 <div class="stat-value">
-                    KES 245,000
+
+                    KES
+                    <?= number_format($todaySales, 2) ?>
+
                 </div>
 
-                <div class="stat-change">
-                    <i class="bi bi-arrow-up"></i>
-                    12.5% vs yesterday
+
+                <div
+                    class="stat-change
+                    <?= $salesChange < 0 ? 'warning' : '' ?>
+                    <?= $salesChange == 0 ? 'neutral' : '' ?>"
+                >
+
+                    <?php if ($salesChange > 0): ?>
+
+                        <i class="bi bi-arrow-up"></i>
+
+                        <?= number_format(abs($salesChange), 1) ?>%
+                        vs yesterday
+
+                    <?php elseif ($salesChange < 0): ?>
+
+                        <i class="bi bi-arrow-down"></i>
+
+                        <?= number_format(abs($salesChange), 1) ?>%
+                        vs yesterday
+
+                    <?php else: ?>
+
+                        No change vs yesterday
+
+                    <?php endif; ?>
+
                 </div>
 
             </div>
 
 
+
+            <!-- =================================
+                 ORDERS TODAY
+            ================================== -->
+
             <div class="stat-card">
+
 
                 <div class="stat-top">
 
@@ -462,25 +791,61 @@ $segment = service('uri')->getSegment(1);
                         Orders Today
                     </div>
 
+
                     <div class="stat-icon">
+
                         <i class="bi bi-cart-check"></i>
+
                     </div>
 
                 </div>
 
+
                 <div class="stat-value">
-                    128
+
+                    <?= number_format($ordersToday) ?>
+
                 </div>
 
-                <div class="stat-change">
-                    <i class="bi bi-arrow-up"></i>
-                    8.2% vs yesterday
+
+                <div
+                    class="stat-change
+                    <?= $ordersChange < 0 ? 'warning' : '' ?>
+                    <?= $ordersChange == 0 ? 'neutral' : '' ?>"
+                >
+
+                    <?php if ($ordersChange > 0): ?>
+
+                        <i class="bi bi-arrow-up"></i>
+
+                        <?= number_format(abs($ordersChange), 1) ?>%
+                        vs yesterday
+
+                    <?php elseif ($ordersChange < 0): ?>
+
+                        <i class="bi bi-arrow-down"></i>
+
+                        <?= number_format(abs($ordersChange), 1) ?>%
+                        vs yesterday
+
+                    <?php else: ?>
+
+                        No change vs yesterday
+
+                    <?php endif; ?>
+
                 </div>
 
             </div>
 
 
+
+            <!-- =================================
+                 TOTAL PRODUCTS
+            ================================== -->
+
             <div class="stat-card">
+
 
                 <div class="stat-top">
 
@@ -488,24 +853,39 @@ $segment = service('uri')->getSegment(1);
                         Total Products
                     </div>
 
+
                     <div class="stat-icon">
+
                         <i class="bi bi-box"></i>
+
                     </div>
 
                 </div>
 
+
                 <div class="stat-value">
-                    1,250
+
+                    <?= number_format($totalProducts) ?>
+
                 </div>
 
-                <div class="stat-change">
+
+                <div class="stat-change neutral">
+
                     All active products
+
                 </div>
 
             </div>
 
 
+
+            <!-- =================================
+                 LOW STOCK
+            ================================== -->
+
             <div class="stat-card">
+
 
                 <div class="stat-top">
 
@@ -513,33 +893,70 @@ $segment = service('uri')->getSegment(1);
                         Low Stock
                     </div>
 
+
                     <div class="stat-icon">
+
                         <i class="bi bi-exclamation-triangle"></i>
+
                     </div>
 
                 </div>
 
+
                 <div class="stat-value">
-                    18
+
+                    <?= number_format($lowStockProducts) ?>
+
                 </div>
 
-                <div class="stat-change warning">
-                    Requires attention
+
+                <div
+                    class="stat-change
+                    <?= $lowStockProducts > 0
+                        ? 'warning'
+                        : 'neutral'
+                    ?>"
+                >
+
+                    <?php if ($lowStockProducts > 0): ?>
+
+                        Requires attention
+
+                    <?php else: ?>
+
+                        Stock levels healthy
+
+                    <?php endif; ?>
+
                 </div>
 
             </div>
 
+
         </div>
 
 
-        <!-- LOWER DASHBOARD -->
+
+        <!-- =====================================
+             LOWER DASHBOARD
+        ====================================== -->
+
         <div class="dashboard-grid">
+
+
+            <!-- =================================
+                 SALES OVERVIEW
+            ================================== -->
 
             <div class="card">
 
+
                 <div class="card-header">
 
-                    <h3>Sales Overview</h3>
+                    <h3>
+                        Sales Overview
+                    </h3>
+
 
                     <span>
                         Last 7 days
@@ -547,60 +964,205 @@ $segment = service('uri')->getSegment(1);
 
                 </div>
 
+
                 <div class="card-body">
 
-                    <div class="chart">
-                        Sales chart will appear here
-                    </div>
+
+                    <?php if (!empty($salesOverview)): ?>
+
+
+                        <?php
+
+                        $salesTotals = array_column(
+                            $salesOverview,
+                            'total'
+                        );
+
+                        $maxSale = !empty($salesTotals)
+                            ? max($salesTotals)
+                            : 0;
+
+                        $maxSale = $maxSale > 0
+                            ? $maxSale
+                            : 1;
+
+                        ?>
+
+
+                        <div class="sales-chart">
+
+
+                            <?php foreach ($salesOverview as $day): ?>
+
+
+                                <?php
+
+                                $percentage =
+                                    ($day['total'] / $maxSale) * 100;
+
+                                $height =
+                                    max(3, ($percentage / 100) * 200);
+
+                                ?>
+
+
+                                <div class="chart-column">
+
+
+                                    <div class="chart-value">
+
+                                        KES
+                                        <?= number_format(
+                                            $day['total']
+                                        ) ?>
+
+                                    </div>
+
+
+                                    <div class="chart-bar-wrapper">
+
+                                        <div
+                                            class="chart-bar"
+                                            style="
+                                                height:
+                                                <?= $height ?>px;
+                                            "
+                                            title="
+                                                <?= esc($day['label']) ?>:
+                                                KES
+                                                <?= number_format(
+                                                    $day['total'],
+                                                    2
+                                                ) ?>
+                                            "
+                                        ></div>
+
+                                    </div>
+
+
+                                    <div class="chart-label">
+
+                                        <?= esc($day['label']) ?>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            <?php endforeach; ?>
+
+
+                        </div>
+
+
+                    <?php else: ?>
+
+
+                        <div class="sales-chart">
+
+                            <div class="empty-chart">
+
+                                <i
+                                    class="bi bi-bar-chart"
+                                    style="
+                                        margin-right: 8px;
+                                    "
+                                ></i>
+
+                                No sales data available yet.
+
+                            </div>
+
+                        </div>
+
+
+                    <?php endif; ?>
+
 
                 </div>
 
             </div>
 
 
+
+            <!-- =================================
+                 QUICK ACTIONS
+            ================================== -->
+
             <div class="card">
+
 
                 <div class="card-header">
 
-                    <h3>Quick Actions</h3>
+                    <h3>
+                        Quick Actions
+                    </h3>
 
                 </div>
 
+
                 <div class="card-body">
 
+
                     <div class="quick-actions">
+
+
+                        <!-- ADD PRODUCT -->
 
                         <a
                             href="<?= base_url('products/create') ?>"
                             class="quick-action"
                         >
+
                             <i class="bi bi-plus-circle"></i>
+
                             Add Product
+
                         </a>
+
+
+                        <!-- NEW PURCHASE -->
 
                         <a
                             href="<?= base_url('purchases/create') ?>"
                             class="quick-action"
                         >
+
                             <i class="bi bi-cart-plus"></i>
+
                             New Purchase
+
                         </a>
+
+
+                        <!-- POS -->
 
                         <a
                             href="<?= base_url('pos') ?>"
                             class="quick-action"
                         >
+
                             <i class="bi bi-shop"></i>
+
                             Open POS
+
                         </a>
+
+
+                        <!-- CUSTOMERS -->
 
                         <a
                             href="<?= base_url('customers') ?>"
                             class="quick-action"
                         >
+
                             <i class="bi bi-person-plus"></i>
+
                             Customers
+
                         </a>
+
 
                     </div>
 
@@ -608,26 +1170,47 @@ $segment = service('uri')->getSegment(1);
 
             </div>
 
+
         </div>
+
 
     </main>
 
 
-    <!-- SIDEBAR TOGGLE -->
+
+    <!-- =========================================
+         SIDEBAR TOGGLE
+    ========================================== -->
+
     <script>
 
-        const sidebar = document.getElementById('sidebar');
-        const main = document.getElementById('main');
-        const toggle = document.getElementById('toggleSidebar');
+        const sidebar =
+            document.getElementById('sidebar');
 
-        toggle.addEventListener('click', function () {
+        const main =
+            document.getElementById('main');
 
-            sidebar.classList.toggle('hidden');
-            main.classList.toggle('expanded');
+        const toggle =
+            document.getElementById('toggleSidebar');
 
-        });
+
+        if (toggle && sidebar && main) {
+
+            toggle.addEventListener(
+                'click',
+                function () {
+
+                    sidebar.classList.toggle('hidden');
+
+                    main.classList.toggle('expanded');
+
+                }
+            );
+
+        }
 
     </script>
+
 
 </body>
 

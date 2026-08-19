@@ -31,7 +31,7 @@ $routes->post('demo/cashier', 'AuthController::demoCashier');
 |--------------------------------------------------------------------------
 */
 
-$routes->get('dashboard', 'Home::index');
+$routes->get('/dashboard', 'DashboardController::index');
 
 
 /*
